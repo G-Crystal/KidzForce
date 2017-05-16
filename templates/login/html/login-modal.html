@@ -1,0 +1,64 @@
+<ion-modal-view view-title="" ng-controller="loginCtrl" class="positive-bg fullscreen_modal">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title positive"></h1>
+    <button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+	<ion-content id="social-login">
+    <div class="">
+			<div class="item positive-bg light">
+
+				<div id="containerlight">
+
+					<form name="authorizationForm" novalidate="" on-valid-submit="attemptLogin(authorizationForm)">
+				<div class="list">
+					<div class="list">
+						<div class="row">
+							<div class="col padding">
+								<button ng-click="attemptFacebookLogin()" class="button icon-left button-block light" style="background-color:#3b5998"><i class="icon ion-social-facebook padding" ></i>Facebook</button>
+							</div>
+							<div class="col padding">
+								<button ng-click="attemptGoogleLogin()" class="button icon icon-left button-block light" style="background-color:#dd4b39;"><i class="ion-social-googleplus icon padding"></i>Google</button>
+							</div>
+						</div>
+					</div>
+					<div class="list">
+						<h3 class="light text-center">or login with</h3>
+					</div>
+					<div class="list list-inset">
+						<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.username.$valid && authorizationForm.$submitted}">
+							<input type="text" ng-model="login.username" name="username" placeholder="Email or Username" ng-minlength="3" required>
+						</label>
+						<div class="error-container" ng-show="authorizationForm.username.$error && authorizationForm.$submitted" ng-messages="authorizationForm.username.$error">
+			              <div ng-messages-include="error-list.html"></div>
+			            </div>
+					</div>
+					<div class="list list-inset">
+						<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
+							<input type="password" ng-model="login.password" name="password" placeholder="Password" ng-minlength="3" required>
+						</label>
+						<div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
+			                <div ng-messages-include="error-list.html"></div> 
+			            </div>
+					</div>
+					<!-- <h2 class="text-right light"><a ng-click="showForgotPassword()">Forgot Password?&nbsp;</a></h2> -->
+			
+					<div class="list">
+						<div class="row">
+							<div class="col padding">
+								<button type="submit" class="button button-block button-outline button-assertive" ng-disabled="login.username==''&&login.password==''">Sign up</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<h3 class="light text-center" style="z-index: 24;"><a ng-click="showTermsOfServiceModal()">Terms of Service</a> and <a ng-click="showPrivacyPolicyModal()">Privacy Policy</a></h3>
+			<h3 class="light text-center">Version: {{version}} Build: {{build}}</h3>
+				</div>
+			</div>
+
+		</div>
+
+
+	</ion-content>
+	<!--end login content section-->
+</ion-modal-view>

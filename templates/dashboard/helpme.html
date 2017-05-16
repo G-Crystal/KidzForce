@@ -1,0 +1,49 @@
+<ion-modal-view>
+	<ion-header-bar class="bar bar-header bar-positive">
+		<!-- <div class="buttons">
+          <button class="button button-clear icon ion-ios-arrow-left" ng-click="modal.hide()"></button>
+        </div> -->
+		<h1 class="title">Family Alert</h1>
+		<button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+	</ion-header-bar>
+	<ion-content class="bullseye" ng-controller="helpMeCtrl">
+		<div class="outer">
+			<div class="middle">
+				<div class="inner">
+					<div class="container-overlay text-center" style="margin-top: 20%;
+width: 95%;
+margin-left: 2.5%;
+margin-right: 2.5%;
+background-color: rgba(255, 255, 255, 0.77);
+padding:20px;
+border-radius:20px;
+height: 70%; position: relative;">
+						<div class="row text-center col">
+							<i class="icon-circle-large text-center"> <ion-icon class="ion-alert-circled danger animated pulse"></ion-icon></i></div>
+						<div class="row col text-center">
+							<h2 class="danger" style="font-weight:700;
+color:red;
+font-size: 30px;
+margin-top: 0px;">Family Alert</h2>
+						</div>
+						<div class="row">
+							<div class="col-75 col-offset-10">
+								<h4 class="text-center positive">Alert will be sent to these contacts including your current location.</h4>
+							</div>
+						</div>
+						<div class="row text-center">
+							<div class="col col-50" ng-if="first_contact==null"><a class="icon-circle danger" ng-click="getContactList(1)"><i class="ion-person-add light"></i></a><br>Add New</div>
+							<div class="col col-50" ng-if="first_contact!=null"><a class="icon-circle danger" ng-click="getContactList(1)"><i class="ion-person-add light"></i></a><br>{{first_contact.name.givenName}} {{first_contact.name.familyName}}</div>
+							<div class="col col-50" ng-if="second_contact==null"><a class="icon-circle danger" ng-click="getContactList(2)"><i class="ion-person-add light"></i></a><br>Add New</div>
+							<div class="col col-50" ng-if="second_contact!=null"><a class="icon-circle danger" ng-click="getContactList(2)"><i class="ion-person-add light"></i></a><br>{{second_contact.name.givenName}} {{second_contact.name.familyName}}</div>
+						</div>
+						<div class="row col">
+							<button class="ion-button text-center button button-block button-positive" ng-disabled="first_contact == null || second_contact == null" ng-click="sendEmergency()">Send</button>
+						</div>
+						<div class="row text-center col danger"><i class="ion-android-call" style="font-size: 4em;"></i><br><a href="tel://911" class="danger text-center"><h4 class="text-uppercase danger">Emergency Dial 911</h4></a></div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</ion-content>
+</ion-modal-view>

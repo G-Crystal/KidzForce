@@ -1,0 +1,117 @@
+<ion-view  cache-view="false" style="background-color:#ffffff;">
+<ion-content id="chores-content" ng-controller="choresCtrl" class="" has-bouncing="false">
+<style type="text/css">
+    #map_canvas {
+        position: relative;
+    }
+
+    .angular-google-map-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 50%;
+    }
+</style>
+  <div class="tabs tabs-striped tabs-top tabs-background-positive tabs-color-light" style="background-color: #3D026E; position: relative; top: 0;">
+    <a class="tab-item" ng-click="changeActiveFilter('new')" ng-class="isActiveFilter('new')" ng-if="!isParent()">
+      New Projects
+    </a>
+    <a class="tab-item" ng-click="changeActiveFilter('my')" ng-class="isActiveFilter('my')">
+      My Projects
+    </a>
+    <a class="tab-item" ng-click="changeActiveFilter('past')" ng-class="isActiveFilter('past')">
+      Past Projects
+    </a>
+  </div>
+
+  <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" ng-if="!isParent()" style="display:none;" ng-cloak>
+    <ui-gmap-map-type options="squaresMapType" show="map.showOverlay"></ui-gmap-map-type>
+    <ui-gmap-marker idkey="homeMarker.id" coords="homeMarker.coords" options="homeMarker.options"></ui-gmap-marker>
+    <ui-gmap-markers models="choreMarkers" coords="'self'" icon="'icon'"></ui-gmap-markers>
+  </ui-gmap-google-map>
+
+  <style>
+  .hasMap {
+    position: absolute;
+    /*top: 280px;*/
+    top: 60px;
+    width: 100%;
+  }
+  </style>
+
+  <ion-list id="feedcards" ng-class="hasMap()" ng-cloak>
+    <div ng-if="projectsLoaded=='empty'" id="nonotification" class="list card actioncard" ng-cloak>
+      <div class="text-center padding">
+          <h3 class="light" ng-if="!isParent()">No projects found near you.</h3>
+          <h3 class="light" ng-if="isParent()">You have not created any projects.</h3>
+      </div>
+      <div class="text-center padding">
+          <h4 class="light subdued" ng-if="!isParent()">When new projects are available they will appear here.</h4>
+          <h4 class="light subdued" ng-if="isParent()">When new projects are created they will appear here.</h4>
+      </div>
+    </div>
+
+    <div id="kb101card" ng-repeat="(key, value) in projects" ng-if="( ((value.child_uid == 0 || value.child_uid == uid || value.poster_uid == uid ) && value.status != 'inactive' && value.status != 'expired' && value.status != 'canceled' && activeFilter == 'new') )" ng-click="viewProject(value.$id, value.status)" ng-cloak>
+    <div id="cardId" class="list card actioncard chorecard" >
+      <h2 class="light text-left" >{{value.name | capitalize}}</h2>
+       <h4 class="light subdued text-uppercase text-left" style="font-size: 14px;margin-top: 10px;margin-left: 8px;opacity: 0.5s;font-weight: 700;">Pay: <span class="choreprice">${{value.pointValuation || '10'}}</span></h4>
+      
+       <div class="row" id="choreparams">
+        <div class="col col-66">
+
+          <!-- <h5 class="icon-cal light text-uppercase">&nbsp; -->
+           <!-- When</h5 style="margin-top:20px;"> -->
+          <h4 class="assertive">{{ showLocalizedDate(value.start_date * 1, value.timezone) | date : 'EEE, MMM d' }}<br>
+            {{ showLocalizedDate(value.start_date * 1, value.timezone) | date : 'h:mm a' }}</h4>
+
+        </div>
+
+        <div class="col-33" style="border-left: 1px solid rgba(255,255,255,0.48); padding-left: 2px;">
+          <h5 class=" light text-uppercase text-center">&nbsp;{{value.status}}</span></h5>
+          <h2 class="balanced text-thin text-center choreprice">
+            <span ng-if="value.status=='posted'" ng-cloak>&nbsp;<i class="icon-public jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='accepted'" ng-cloak>&nbsp;<i class="icon-check jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='started'" ng-cloak>&nbsp;<i class="icon-Chores-Nav jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='reviewed'" ng-cloak>&nbsp;<i class="icon-money jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='completed'" ng-cloak>&nbsp;<i class="icon-star jobstatus"></i>&nbsp;</span>
+          </h2>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div id="kb101card" ng-repeat="(key, value) in myprojects" ng-if="( ((value.status == 'inactive' || value.status == 'expired' || value.status == 'canceled' || value.status == 'completed') && (activeFilter == 'past')) || ((value.status != 'inactive' && value.status != 'expired' && value.status != 'canceled' && value.status != 'completed') && (activeFilter == 'my') ) )" ng-click="viewProject(value.$id, value.status)" ng-cloak>
+    <div id="cardId" class="list card actioncard chorecard" >
+      <h2 class="light text-left" >{{value.name | capitalize}}</h2>
+       <h4 class="light subdued text-uppercase text-left" style="font-size: 14px;margin-top: 10px;margin-left: 8px;opacity: 0.5s;font-weight: 700;">Pay: <span class="choreprice">${{value.pointValuation || '10'}}</span></h4>
+
+      <div class="row" id="choreparams">
+        <div class="col col-66">
+
+          <!-- <h5 class="icon-cal light text-uppercase">&nbsp; -->
+           <!-- When</h5 style="margin-top:20px;"> -->
+          <h4 class="assertive">{{ showLocalizedDate(value.start_date * 1, value.timezone) | date : 'EEE, MMM d' }}<br>
+            {{ showLocalizedDate(value.start_date * 1, value.timezone) | date : 'h:mm a' }}</h4>
+
+        </div>
+
+        <div class="col-33" style="border-left: 1px solid rgba(255,255,255,0.48); padding-left: 2px;">
+          <h5 class=" light text-uppercase text-center">&nbsp;{{value.status}}</span></h5>
+          <h2 class="balanced text-thin text-center choreprice">
+            <span ng-if="value.status=='posted'" ng-cloak>&nbsp;<i class="icon-public jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='accepted'" ng-cloak>&nbsp;<i class="icon-check jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='started'" ng-cloak>&nbsp;<i class="icon-chore jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='reviewed'" ng-cloak>&nbsp;<i class="icon-money jobstatus"></i>&nbsp;</span>
+            <span ng-if="value.status=='completed'" ng-cloak>&nbsp;<i class="icon-star jobstatus"></i>&nbsp;</span>
+          </h2>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </ion-list>
+
+</ion-content>
+</ion-view>

@@ -1,0 +1,106 @@
+<ion-modal-view view-title="" ng-controller="viewProjectCtrl" class="positive-bg fullscreen_modal">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title positive"></h1>
+        <button class="button" ng-click="projectViewModal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-content id="social-login" class="positive-bg text-center light padding manual-remove-top-padding has-header" ng-class="keyboardActive" has-bouncing="false" style="margin-left: 10px;">
+    <h2 class="light text-left" >{{project.name | capitalize}}</h2>
+       <h4 class="light subdued text-uppercase text-left" style="font-size: 14px;margin-top: 10px;margin-left: 8px;opacity: 0.5s;font-weight: 700;">Pay: <span class="choreprice">${{project.pointValuation || '10'}}</span></h4>
+      
+       <div class="row" id="choreparams">
+        <div class="col col-66">
+
+          <!-- <h5 class="icon-cal light text-uppercase">&nbsp; -->
+           <!-- When</h5 style="margin-top:20px;"> -->
+          <h4 class="assertive">{{ showLocalizedDate(project.start_date * 1, project.timezone) | date : 'EEE, MMM d' }}<br>
+            {{ showLocalizedDate(project.start_date * 1, project.timezone) | date : 'h:mm a' }}</h4>
+
+        </div>
+
+        <div class="col-33" style="border-left: 1px solid rgba(255,255,255,0.48); padding-left: 2px;">
+          <h5 class=" light text-uppercase text-center">&nbsp;{{project.status}}</span></h5>
+          <h2 class="balanced text-thin text-center choreprice">
+            <span ng-if="project.status=='posted'" ng-cloak>&nbsp;<i class="icon-public jobstatus"></i>&nbsp;</span>
+            <span ng-if="project.status=='accepted'" ng-cloak>&nbsp;<i class="icon-check jobstatus"></i>&nbsp;</span>
+            <span ng-if="project.status=='started'" ng-cloak>&nbsp;<i class="icon-Chores-Nav jobstatus"></i>&nbsp;</span>
+            <span ng-if="project.status=='reviewed'" ng-cloak>&nbsp;<i class="icon-money jobstatus"></i>&nbsp;</span>
+            <span ng-if="project.status=='completed'" ng-cloak>&nbsp;<i class="icon-star jobstatus"></i>&nbsp;</span>
+          </h2>
+        </div>
+      </div>
+     <div class="row item">
+     <div class="col">
+      <ion-slide-box style="max-height: 300px;">
+     <ion-slide> <img ng-src="{{project.photos}}"  class="full-image" style="max-height: 100%; max-width:100%;"> </ion-slide>
+     <ion-slide> <img ng-click="navigateToLocation()" ng-src="{{mapview}}" class="full-image"> </ion-slide>
+    </ion-slide-box>
+      </div>
+      </div>
+    <!-- <div class="row">
+      <div class="col">
+        <h4 class="assertive text-uppercase text-left">Project Notes</h4>
+      </div>
+    </div> -->
+    <div clas="row"><div class="col text-left">
+      <p class="light">{{project.description}}</p>
+    </div></div>
+    <!-- <div class="list">
+      <a class="text-left item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <h3 class="light">Child Applied</h3>
+            <p class="assertive">A child applied to this project on 1/1/2016</p>
+          </div>
+        </div>
+      </a>
+      <hr/>
+      <a class="text-left item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <h3 class="light">Child Accepted</h3>
+            <p class="assertive">A child was accepted to this project on 1/1/2016</p>
+          </div>
+        </div>
+      </a>
+      <hr/>
+      <a class="text-left item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <h3 class="light">Child Started</h3>
+            <p class="assertive">A child started this project on 1/1/2016</p>
+          </div>
+        </div>
+      </a>
+      <hr/>
+      <a class="text-left item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <h3 class="light">Child Completed</h3>
+            <p class="assertive">A child completed this project on 1/1/2016</p>
+          </div>
+        </div>
+      </a>
+      <hr/>
+    </div> -->
+    <!-- <hr class="subdued"/> -->
+    <div class="row padding">
+    <div class="col text-center">
+      <a ng-if="!project.applied && project.poster_uid != uid && project.child_uid != uid && project.status == 'posted'" class="button button-block button-assertive button-outline" ng-click="apply(project.id)" ng-disabled="hasApplied(project.$id)">Apply Now</a>
+      
+      <!-- <div ng-if="project.applied || project.poster_uid == uid || project.child_uid == uid || project.status != 'posted' || project.child_uid != 0" class="row text-left">
+        <div class="col">
+          <span ng-class="projectStage(project.status, 1)">&nbsp;<i class="icon-public jobstatus"></i>&nbsp;</span>
+          <span ng-class="projectStage(project.status, 2)">&nbsp;<i class="icon-check jobstatus"></i>&nbsp;</span>
+          <span ng-class="projectStage(project.status, 3)">&nbsp;<i class="icon-Chores-Nav jobstatus"></i>&nbsp;</span>
+          <span ng-class="projectStage(project.status, 4)">&nbsp;<i class="icon-money jobstatus"></i>&nbsp;</span>
+          <span ng-class="projectStage(project.status, 5)">&nbsp;<i class="icon-star jobstatus"></i>&nbsp;</span>
+        </div>
+      </div><br/> -->
+      <!-- <a ng-if="project.poster_uid == uid" class="button button-block button-assertive button-outline" ng-click="manageProject(project.$id)">Manage Project</a> -->
+
+      <!-- <emphasis><p class="small subdued light text-thin text-right" ng-click="reportChore(project.$id)">Report an issue</p></emphasis> -->
+      
+      </div>
+    </div>
+    </ion-content>
+</ion-modal-view>

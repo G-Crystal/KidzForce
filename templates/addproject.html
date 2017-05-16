@@ -1,0 +1,105 @@
+<ion-modal-view cache-view="false" style="background-color: #3d026e;">
+<ion-header-bar class="bar bar-header bar-positive">
+<h1 class="title positive"></h1>
+<button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+</ion-header-bar>
+<ion-content cache-view="false" scroll="true" overflow-scroll="true" ng-controller="addProjectCtrl">
+<div class="container">
+	<div class="fs-form-wrap" id="fs-form-wrap">
+		<div class="fs-title">
+			
+		</div>
+		<form id="myform" class="fs-form fs-form-full" autocomplete="off">
+			<ol class="fs-fields">
+				<li>
+					<label class="fs-field-label fs-anim-upper" for="q1">What work do you want done?</label>
+					<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" type="text" name="title" ng-model="project.title" placeholder="Car wash and wax" ng-minlength="2" ng-maxlength="20" required/>
+				</li>
+				<li ng-if="!isBrowserMode">
+					<label class="fs-field-label fs-anim-upper" for="q3" data-info=""> When should the project be completed? </label>
+					<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower date" style="background-color:transparent;" ng-model="project.date" type="date" date required placeholder="4/1/2017" /><br/>
+					<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower time" style="background-color:transparent;" ng-model="project.time" id="project_time" type="time" time required placeholder="9:00 AM"/>
+				</li>
+				<li ng-if="isBrowserMode">
+					<label class="fs-field-label fs-anim-upper" for="q3" data-info=""> When should the project be completed? </label>
+					<datepicker date-format="longDate">
+					  <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower date" ng-model="project.date" type="text" date required placeholder="4/1/2017"/>
+					</datepicker><br/>
+					<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower time" style="background-color:transparent;" ng-model="project.time" id="project_time" type="time" time required placeholder="9:00 AM"/>
+				</li>
+				<li class="keyboard-hide">
+					<label class="fs-field-label fs-anim-upper" for="q3" data-info="This will help us know what kind of service you need">Public or by Invite?</label>
+					<div class="fs-anim-lower">
+						<div class="button-bar">
+							<a class="button button-item1 text-center genderbar" ng-class="isActiveClass('public')" ng-click="setActive('public')" style="border: 1px solid white;"><i class="icon-public" style="font-size:2em; line-height:1em; "></i>Public</a>
+							<a class="button button-item2 text-center genderbar" ng-class="isActiveClass('invite')" ng-click="setActive('invite')" style="border: 1px solid white;"><i class="icon-child-id" style="font-size:2em; line-height:1em; "></i>Invite</a>
+						</div>
+					</div>
+					<div class="fs-anim-lower" ng-if="isActive('invite')">
+						<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" name="child_id" ng-model="project.member_id" placeholder="___-___-___" model-view-value="true" ui-mask="999-999-999" ng-maxlength="12" child_card required>
+					</label>
+					<div ng-if="!isBrowserMode">
+						<button class="button button-assertive button-block" ng-click="scanCard()">Scan Member Card</button>
+					</div>
+					<!-- <div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
+                            <span><input id="q3b" name="q3" type="radio" value="conversion"><label for="q3b" class="radio-conversion">All members can apply</label></span>
+                            <span><input id="q3c" name="q3" type="radio" value="social"><label for="q3c" class="radio-social">Invite By Member ID</label></span>
+                        </div> -->
+				</li>
+				<li>
+					<label class="fs-field-label fs-anim-upper">Select a photo</label>
+					<a class="fs-field-label fs-anim-upper button button-assertive button-block" ng-click="uploadPhoto()">Upload a photo</a>
+					
+					<div class="chorecontainer fs-anim-lower">
+						<img style="width:100%;height:300px;border:0;" ng-if="project.photos != ''" src="{{project.photos}}"/>
+					</div>
+				</li>
+				<li>
+					<label class="fs-field-label fs-anim-upper" for="q4">Any important details?</label>
+					<textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" type="text" name="description" ng-model="project.description" ng-minlength="2" ng-maxlength="20"></textarea>
+				</li>
+				
+				<li>
+					<label class="fs-field-label fs-anim-upper" for="q5">What's your budget?</label>
+					
+					<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" pattern="[0-9]*" inputmode="numeric" class="fs-anim-lower" type="number" name="price" ng-model="project.price" ng-minlength="2" ng-maxlength="120" required/>
+					<!-- <label class="fs-field-label fs-anim-upper" for="q6">Where do you want this project to be performed?</label>
+					<input type="text" class="fs-anim-lower" google-autocomplete-suggestion location="data.location" country-code="{{countryCode}}" on-selection="onAddressSelection(location)" ng-model="data.location.formatted_address" readonly required /> -->
+				</li>
+				<li>
+					<label class="fs-field-label fs-anim-upper" for="q6">Is this project suitable for all age groups?</label>
+					<h3 class="fs-anim-lower assertive">Suggested age: <span ng-bind="project.age_range"></span> – 17</h3>
+					<div class="fs-anim-lower range">
+						<input type="range" style="border:0px;" ng-model="project.age_range" name="age_range" min="7" value="7" max="17">
+					</div>
+					
+				</li>
+				<li>
+					<label class="fs-field-label fs-anim-upper" for="q6">What is the home address for this project?</label>
+					<input type="text" class="fs-anim-lower date_input" google-autocomplete-suggestion location="data.location" country-code="{{countryCode}}" on-selection="onAddressSelection(location)" ng-model="data.location.formatted_address" address_field readonly required />
+				</li>
+				<li>
+					<div class="fs-anim-upper item-text-wrap text-center" ng-controller="paymentMethodsCtrl">
+						
+						<div class="list">
+							<div class="text-right" ng-repeat="(key, value) in paymentMethods" ng-if="key != '$id' && key != '$priority' && key != '$resolved' && value.card != ''" ng-click="managePaymentMethod(key, value)">
+								<img src="{{value.icon}}" style="width: 50px;float: left;">
+								<strong ng-bind="value.card"></strong><br>
+								<p ng-bind="value.name"></p>
+							</div>
+							<div class="">
+								<button disabled="disabled" ng-click="newPaymentMethod()" class="button button-assertive button-block">Add Payment Method</button>
+							</div>
+						</div>
+					</div>
+					<div class="fs-anim-lower">
+						<label class="light">There is a 20% service fee charged by KidzForce. Make sure all entries are correct.</label>
+					</div>
+				</li>
+				</ol><!-- /fs-fields -->
+				<button ng-disabled="checkIfValid()" class="fs-submit" ng-click="addProject()" type="submit" ng-bind="submitBtn"></button>
+				</form><!-- /fs-form -->
+				</div><!-- /fs-form-wrap -->
+				</div><!-- /container -->
+				</ion-content>
+				</ion-modal-view>

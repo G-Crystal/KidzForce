@@ -1,0 +1,30 @@
+<ion-modal-view>
+	<ion-content ng-controller="rooDailyDropController">
+	<script>
+		
+	</script>
+<style type="text/css">
+.centertext {
+	width: 480px;
+	height: 22px;
+	text-align: center;
+}
+
+canvas#lyr_canvasQlinqoBackground1 {
+	background: url(Resources/background.jpg) no-repeat center center !important;
+	background-size: cover !important;
+	width:100vw;
+	height:100vh;
+}
+
+
+
+</style>
+		<div id="pageContainer" class="centerdiv">
+	<div id="outerDiv" class="centerdiv" style="position: relative;">
+		<div id="canvasContainer" style="position: relative;width:100%"></div>
+		<div id="canvasMouseHitDetector" style="position: relative;width:480px;height:80px;z-index:20;background-color:green;opacity:0;"></div>
+		<div id="canvasGameOverHitDetector" style="position: absolute;top:240px;left:180px;width:120px;height:160px;z-index:21;background-color:green;opacity:0;"></div>
+	</div>
+	</ion-content>
+</ion-modal-view>

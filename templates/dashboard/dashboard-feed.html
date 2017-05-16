@@ -1,0 +1,113 @@
+<ion-view cache-view="false" id="Dashboard" style="background-color:#ffffff;" ng-controller="notificationCtrl">
+
+    <ion-content padding="true" class="manual-remove-top-padding has-header" has-bouncing="false">
+        <div class="list card manual-card-fullwidth" id="leadercard" ng-if="profile.$id != undefined">
+            <div class="row" ng-cloak>
+                <div class="col">
+                    <h4 class="assertive" ng-if="!isParent()" ng-bind="balance.rank"></h4>
+                    <h2 class="light text-uppercase" ng-bind="profile.name"></h2>
+                </div>
+            </div>
+            <div class="roo"> </div>
+            <div class="row" ng-cloak>
+                <div class="col-50">
+                    <h4 class="light">Projects&nbsp;<span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_total_projects"></span><br>
+                <span class="light">Completed&nbsp;</span><span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_completed_projects"></span></h4></div>
+                <div class="col-50">
+                    <h4 class="light" style="display: inline; float:left;">Rating&nbsp;<rating id="rating" ng-model="balance.avg_review_score" max="5" readonly="true"></rating></h4>
+                </div>
+            </div>
+            <div class="row" ng-cloak>
+              <div class="col-50">
+                <h4 class="light">Member since&nbsp;</h4>
+              </div>
+              <div class="col-50">
+                <span class="assertive" style="font-size: 1.4em;" ng-bind="profile.member_since*1000 | date : 'M/d/y'"></span>
+              </div>
+            </div>
+            <div class="row" ng-if="!isParent()" ng-cloak>
+              <div class="col-50">
+                <h4 class="light">Member ID&nbsp;</h4>
+              </div>
+              <div class="col-50">
+                <span class="assertive" style="font-size: 1.4em;" ng-bind="profile['id']"></span>
+              </div>
+            </div>
+            <hr class="subdued" ng-cloak>
+            <div class="row" ng-if="!isParent()" ng-cloak>
+                <div class="col-50">
+                    <h4 class="assertive">Earned</h4>
+                    <h2 class="light" style="font-size: 2.5em;">${{balance.cash || '0'}}</h2></div>
+                <div class="col-50">
+                    <h4 class="assertive">Points</h4>
+                    <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2></div>
+            </div>
+            <div class="row" ng-if="isParent()" ng-cloak>
+                <div class="col">
+                    <h4 class="assertive">Points</h4>
+                    <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2></div>
+            </div>
+            <div class="row">
+
+            </div>
+
+        </div>
+        <ion-list id="feedcards" ng-cloak>
+
+            <div ng-if="isEmpty" id="nonotification" class="list card actioncard" ng-cloak>
+                <div class="text-center padding">
+                    <h3 class="light">No notifications</h3>
+                </div>
+                <div class="text-center padding">
+                    <h4 class="light subdued">When new activity occurs new messages will be shown here.</h4>
+                </div>
+                <button class="button button-positive text-center" ui-sref="app.parent-chores" ng-if="isParent()" style="margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;">View Projects</button>
+                <button class="button button-positive text-center" ui-sref="app.child-chores" ng-if="!isParent()" style="margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;">View Chores</button>
+            </div>
+
+            <!--This is a KB101 Action Card-->
+            <div id="kb101card" class="item-remove-animate animated {{notification.animate}}" ng-repeat="(key, notification) in notifications">
+                <p class="small subdued"> {{ (notification.data.date * 1000) | date : 'EEEE, MMM d h:mm a' }} </p>
+                <!-- ng-click="additionalAction(notification)" -->
+                <div id="cardId" class="list card {{notification.cardclass}}" ng-click="">
+                    <div class="row" ng-click="additionalAction(notification)">
+                        <h2 class="light">{{notification.data.title}}</h2>
+                    </div>
+                    <div class="row" ng-click="additionalAction(notification)">
+                        <div class="col col-80">
+                            <h4 class="light subdued">{{notification.data.body}}</h4>
+                        </div>
+                        <div class="col col-20">
+                            <h3 class="light col-right text-right text-thin" ng-if="notification.isActionCard"><ng-bind-html ng-bind-html="notification.cardRightAction"></ng-bind-html></h3>
+                            <a ng-click="onClickNotification(key, 'dismiss', notification.id, '')" class="assertive text-right icon-times cardclose" ng-if="!notification.isActionCard"></a>
+                        </div>
+                    </div>
+                    <div class="row assertive" ng-if="hasRating(notification.type)">
+                        <rating ng-if="notification.isActionCard" ng-model="notification.rating" max="5"></rating>
+                        <rating ng-if="!notification.isActionCard" readonly="readonly" ng-model="notification.data.stars" max="5"></rating>
+                    </div>
+                    <div class="row" ng-if="hasMap(notification.type)">
+                        <img class="full-image" style="height: 200px;" ng-src="{{notification.data.geocoded_image}}" alt="" />
+                    </div>
+                    <div class="row" style="width:100%; margin-top:6%; zoom:0.8">
+                        <div ng-repeat="(actionKey, actionValue) in notification.actions" class="col {{hasOffset(actionKey)}}">
+
+                            <a ng-click="onClickNotification(key, actionValue.action, notification.id, notification.rating)" class="button button-block button-outline {{actionValue.icon}} button-assertive"> &nbsp; {{actionValue.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Card-->
+
+           <!--  <div ng-repeat="(key, value) in wordpress_posts">
+            {{value}}
+            </div> -->
+        </ion-list>
+
+        <!-- <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="reload()" distance="10%"></ion-infinite-scroll> -->
+    </ion-content>
+</ion-view>

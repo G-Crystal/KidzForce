@@ -1,0 +1,164 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <!-- <div class="buttons">
+         <button class="button button-clear icon ion-ios-arrow-left" ng-click="modal.hide()"></button>
+         </div> -->
+        <h1 class="title">Profile Manager</h1>
+        <button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-pane ng-controller="profileCtrl">
+        <ion-tabs class="tabs-top">
+            <!-- Tab 1 -->
+            <ion-tab title="MEMBER ID" ng-if="!isParent()">
+                <ion-nav-view name="tab-tab1">
+                    <ion-content>
+                        <div class="item item-text-wrap text-center">
+                            <div class="tabtext">
+                                <i class="icon-profile" style="font-size: 4em; margin-bottom:-20px;"></i>
+                                <h2>Member Info</h2>
+                            </div>
+
+                            <p> Each member's ID can be given to homeowner's, business professionals or others who you want to send you invites directly for chores or projects they have. </p>
+
+                            <div class="row">
+                                <div class="col col-80">
+                                    <p class="text-left">Username: {{ profile.username }}</p>
+                                    <p class="text-left">Member ID: {{ memberId }}</p>
+                                </div>
+                                <div class="col col-20">
+                                    <img ng-src="{{getQRImageLink()}}" class="full-image" style="width: 90%; height: 90%; float: right;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="item item-text-wrap text-center">
+                     <h2>Public Resume</h2>
+                     This information will be made visible to user’s whom you interact with through KB101.
+                     <div class="alert alert-warning tooltip">
+                        -->
+                        <!-- <i class="icon-info"/> -->
+                        <!--
+                        <strong>TIP:</strong> Avoid contact information like phone or emails. Instead enter what your goals are for your earnings.
+                     </div>
+                     <label class="item item-input item-stacked-label">
+                     <span class="input-label">Public Resume</span>
+                     <input type="text" ng-model="profile.resume">
+                     </label>
+                     <button class="button button-positive" ng-click="updateResume()">UPDATE</button>
+                  </div> -->
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <ion-tab title="ACCOUNT">
+                <ion-nav-view name="tab-tab1">
+                    <ion-content>
+                        <div class="item item-text-wrap text-center" ng-if="isParent()">
+                            <div class="tabtext">
+                                <i class="icon-profile" style="font-size: 4em; margin-bottom:-20px;"></i>
+                                <h2>Update Account</h2>
+                            </div>
+                            <p>You can update your address and billing information on file below by tapping the 'Edit Account' button.</p>
+                            <label class="item item-input">
+                             <input type="text" placeholder="Home Address" readonly disabled ng-model="identity.address">
+                            </label>
+                            <label class="item item-input">
+                             <input type="text" placeholder="Mobile Phone" readonly disabled ng-model="identity.phone">
+                            </label><br/>
+                            <button class="button button-positive button-outline button-block row col" ng-click="updateAccount()">Edit Account</button>
+                        </div>
+                        <div class="item item-text-wrap text-center">
+                            <div class="tabtext">
+                                <i class="icon-password" style="font-size: 4em; margin-bottom:-20px;"></i>
+                                <h2>Change Password</h2>
+                            </div>
+
+                            <p> Once your password has been changed it cannot be undone. Your password is encrypted and not accesible by KB101 for retrieval.</p>
+
+                            <form novalidate="novalidate" on-valid-submit="updatePassword()">
+                                <label class="item item-input validated">
+                                 <input type="password" ng-model="newauth.password" required="required" name="password" placeholder="New password">
+                                 <i class="icon ion-alert-circled error"></i>
+                                 </label>
+
+
+                                <label class="item item-input validated">
+                                 <input type="password" ng-model="newauth.confirm" required="required" name="confirm" placeholder="Re-enter new password">
+                                 <i class="icon ion-alert-circled error"></i>
+                                 </label>
+
+                                <button class="button button-positive button-outline button-block row col" ng-disabled="!isCompletedPassword()">Update Password</button>
+                            </form>
+                        </div>
+
+                        <div ng-if="isParent()" class="item item-text-wrap text-center" ng-controller="paymentMethodsCtrl">
+                            <div class="tabtext">
+                                <i class="icon-ccard" style="font-size:4em; margin-bottom:-20px;"></i>
+                                <h2>Payment Methods</h2>
+                            </div>
+
+                            <p>These payment methods will be used for processing payments.</p><br/>
+
+                            <div class="list">
+                                <div class="item text-right" ng-repeat="(key, value) in paymentMethods" ng-if="key != '$id' && key != '$priority' && key != '$resolved' && value.card != ''" ng-click="managePaymentMethod(key, value)">
+                                    <img src="{{value.icon}}" style="width: 50px;float: left;">
+                                    <strong ng-bind="value.card"></strong><br>
+                                    <p ng-bind="value.name"></p>
+                                </div>
+                                <div class="item">
+                                <button disabled="disabled" ng-click="newPaymentMethod()" class="button button-positive button-block">Add Payment Method</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item item-text-wrap text-center" ng-controller="paymentMethodsCtrl">
+                            <div class="tabtext">
+                                <i class="icon-bank" style="font-size:4em; margin-bottom:-20px;"></i>
+                                <h2>Payout Methods</h2>
+                            </div>
+
+                            <p>These payout methods will be used for payouts, and withdrawls.</p><br/>
+
+                            <div class="list">
+                                <div class="item" ng-repeat="(key, value) in payoutMethods" ng-click="managePayoutMethod(key, value)">
+                                    <strong ng-bind="value.account_number"></strong><br>
+                                    <p ng-bind="value.name"></p>
+                                </div>
+                                <div class="item">
+                                <button ng-click="newPayoutMethod()" class="button button-positive button-block">Add Payout Method</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <!-- Tab 2 -->
+            <ion-tab title="GROW MY BIZ" ng-if="!isParent()">
+                <ion-nav-view name="tab-tab2">
+                    <ion-content>
+                        <div class="list">
+                            <div class="item item-text-wrap text-center">
+                                <div class="tabtext">
+                                    <i class="icon-announce" style="font-size: 4em; margin-bottom:-20px;"></i>
+                                    <h2>Spread the word</h2>
+                                </div>
+
+
+                                <p>Hand out flyers and business cards to promote yourself on KB101. Your neighbors will be able to invite you personally to complete a project through their app. </p><br/>
+
+                            </div>
+                            <div class="item item-divider"></div>
+
+                            <div class="item text-center text-wrap">
+                                <img id="businesscard_img" src="img/businesscard.jpg" class="full-width full-image padding" style="border: 1px solid black;">
+
+                                <button class="button button-outline button-positive button-block" ng-click="printCards()">Print your cards</button>
+                                <button class="button button-outline button-positive button-block" ng-click="purchaseOthers()">Redeem rewards for more</button>
+
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+    </ion-pane>
+</ion-modal-view>

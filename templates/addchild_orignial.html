@@ -1,0 +1,97 @@
+<ion-modal-view>
+<ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title positive"></h1>
+        <button class="button" ng-click="modal.hide()"><i class="icon-close"></i></button>
+    </ion-header-bar>
+<ion-content scroll="true">
+<ng-controller ng-controller="addChildCtrl">
+<wizard on-finish="addChild()" hide-indicators="true">
+    <wz-step wz-title="child" canexit="validate(1)">
+      <form name="addChildFormFirstStep" novalidate="" on-valid-submit="formValidSubmit(addChildFormFirstStep, 1)">
+      <div class="list">
+        <div class="item">
+          <div class="button-bar">
+           <a class="button button-item1 text-center genderbar" ng-class="isActiveClass('boy')" ng-click="setActive('boy')"><i class="icon-boy-icon" style="font-size:2em; line-height: 1em;"></i>Male</a>
+           <a class="button button-item2 text-center genderbar" ng-class="isActiveClass('girl')" ng-click="setActive('girl')"><i class="icon-Girl" style="font-size:2em; line-height: 1em;"></i>Female</a>
+          </div>
+        </div>
+        <div>
+          <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : addChildFormFirstStep.name.$invalid && addChildFormFirstStep.$submitted, 'no-errors' : addChildFormFirstStep.name.$valid && addChildFormFirstStep.$submitted}">
+            <span class="input-label">Child name</span>
+            <input type="text" name="name" ng-model="child.name" placeholder="Enter childs name" ng-minlength="2" ng-maxlength="40" required>
+          </label>
+          <div class="error-container" ng-show="addChildFormFirstStep.name.$error && addChildFormFirstStep.$submitted" ng-messages="addChildFormFirstStep.name.$error">
+            <div ng-messages-include="error-list.html"></div>
+          </div>
+        </div>
+        <!-- <onezone-datepicker datepicker-object="onezoneDatepicker"> -->
+        <div>
+          <a class="item item-icon-left" ng-click="getDateTest()" ng-class="{ 'has-errors' : addChildFormFirstStep.birthdate.$invalid && addChildFormFirstStep.$submitted, 'no-errors' : addChildFormFirstStep.birthdate.$valid && addChildFormFirstStep.$submitted}">
+            <i class="icon ion-android-calendar"></i>
+            <span ng-show="child.birthdate==''">Enter birthdate</span>
+            <span ng-show="child.birthdate!=''" ng-bind="child.birthdate | date : 'longDate'"></span>
+            <input type="hidden" name="birthdate" ng-model="child.birthdate" required/>
+          </a>
+          <div class="error-container" ng-show="addChildFormFirstStep.birthdate.$error && addChildFormFirstStep.$submitted" ng-messages="addChildFormFirstStep.birthdate.$error">
+            <div ng-messages-include="error-list.html"></div>
+          </div>
+        </div>
+        <!-- </onezone-datepicker> -->
+      </div>
+            <!-- <div class="row" id="project-popular-items"></div> -->
+            <!-- <span ng-bind="popularItems"></span> -->
+
+      <button class="button button-positive text-center button-block" type="submit">Continue</button>
+      </form>
+    </wz-step>
+    <wz-step wz-title="login">
+      <form name="addChildFormSecondStep" novalidate="" on-valid-submit="formValidSubmit(addChildFormSecondStep, 2)">
+        <div class="list">
+          <!-- <div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : addChildFormSecondStep.email.$invalid && addChildFormSecondStep.$submitted, 'no-errors' : addChildFormSecondStep.email.$valid && addChildFormSecondStep.$submitted}">
+              <span class="input-label">Email</span>
+              <input type="email" name="email" ng-model="child.email" placeholder="Enter email" ng-minlength="8" ng-maxlength="40" required>
+            </label>
+            <div class="error-container" ng-show="addChildFormSecondStep.email.$error && addChildFormSecondStep.$submitted" ng-messages="addChildFormSecondStep.email.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div> -->
+          <input type='hidden' name='email' ng-model='child.email' value='abc@gmail.com' />
+          <div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : addChildFormSecondStep.username.$invalid && addChildFormSecondStep.$submitted, 'no-errors' : addChildFormSecondStep.username.$valid && addChildFormSecondStep.$submitted}">
+              <span class="input-label">Username</span>
+              <input type="text" name="username" ng-model="child.username" placeholder="Enter username" ng-minlength="2" ng-maxlength="20" required>
+            </label>
+            <div class="error-container" ng-show="addChildFormSecondStep.username.$error && addChildFormSecondStep.$submitted" ng-messages="addChildFormSecondStep.username.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+          <div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : addChildFormSecondStep.pin.$invalid && addChildFormSecondStep.$submitted, 'no-errors' : addChildFormSecondStep.pin.$valid && addChildFormSecondStep.$submitted}">
+              <span class="input-label">Pin</span>
+              <input type="text" name="pin" ng-model="child.pin" placeholder="Enter pin" ng-minlength="4" ng-maxlength="5" required>
+            </label>
+            <div class="error-container" ng-show="addChildFormSecondStep.pin.$error && addChildFormSecondStep.$submitted" ng-messages="addChildFormSecondStep.pin.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+          <div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : addChildFormSecondStep.phone.$invalid && addChildFormSecondStep.$submitted, 'no-errors' : addChildFormSecondStep.phone.$valid && addChildFormSecondStep.$submitted}">
+              <span class="input-label">Phone</span>
+              <input type="text" name="phone" ng-model="child.phone" placeholder="(___) ___-____" ui-mask="(999) 999-9999" ng-minlength="11" ng-maxlength="14" required>
+            </label>
+            <div class="error-container" ng-show="addChildFormSecondStep.phone.$error && addChildFormSecondStep.$submitted" ng-messages="addChildFormSecondStep.phone.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+        </div>
+        <div class="button-bar slider-button-bar">
+          <a class="button button-item1 text-center button-assertive" wz-previous>Back</a>
+          <button class="button button-item2 text-center button-positive" type="submit">Complete</button>
+        </div>
+      </form>
+    </wz-step>
+</wizard>
+</ng-controller>
+</ion-content>
+</ion-modal-view>

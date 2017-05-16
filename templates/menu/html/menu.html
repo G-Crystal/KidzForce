@@ -1,0 +1,161 @@
+<!--View Information-->
+<!--View name : Menu-->
+<!--Controller name : menuCtrl-->
+<!--Controller path : www/templates/menu/js/controllers.js-->
+<!--State name : app-->
+<!--URL : #app-->
+<style>
+    .logoicon {
+        background: url(img/kb101-logo.svg) no-repeat;
+        width: 70px;
+        height: 85px!important;
+        position: absolute;
+        top: -9px;
+        background-size: 100% auto;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+
+    .logoiconon {
+        background: url(img/kb101-logo-on.svg) no-repeat;
+        width: 70px;
+        height: 85px!important;
+        position: absolute;
+        top: -9px;
+        background-size: 100% auto;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+
+    .badge-danger {
+        margin-right: -8px;
+        background-color: #880101;
+        color: white;
+        font-weight: 300;
+    }
+
+    #kbsidemenu i {
+        font-size: 120%;
+        vertical-align: middle;
+        border-color: white;}
+
+    .navtextsmall {
+    background-color: rgb(36, 0, 36);
+    border-radius: 20px;
+    padding: 4px 14px 4px 14px;
+    font-size: 12px;
+    position: absolute;
+    top: 35%;
+    left: -90px;
+}
+    
+</style>
+
+<ion-side-menus enable-menu-with-back-views="true">
+
+    <ion-side-menu-content ng-controller="menuCtrl" drag-content="false">
+
+        <ion-nav-bar class="bar-positive light has-tabs-top">
+            <ion-nav-buttons side="left" class="has-header">
+                <button class="button button-icon button-positive ion-android-menu" menu-toggle="left"></button>
+                <!-- <button class="button button-clear button-light"><span ng-bind="getCurrentUsername()"></span></button> -->
+            </ion-nav-buttons>
+            <ion-nav-title>
+              <span ng-bind="getCurrentUsername()"></span>
+            </ion-nav-title>
+            <ion-nav-buttons side="right" class="has-header">
+                <button ng-if="!isParent() && !window.isBrowserMode" class="button button-icon button-positive icon-safety" ng-click="showHelpMeModal()"></button>
+                <button ng-if="isParent()" class="button button-icon button-positive icon-reward" ng-click="showEarnedModal()"></button>
+                <!--<button ng-if="!isParent()" class="button button-icon button-positive ion-ios-location-outline" ng-click="showCheckInModal()"></button>-->
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <div ng-if="isParent()" ng-controller="menuPlusCtrl" class='multi-action' ng-click="activateMultiAction()">
+            <button class='action-button' ng-class="multiActionActiveCheck()"><span class='ion-plus'></span></button>
+            <ul class='actions'>
+                <li><a ng-click="showAddChildModal()"><span class='kb-25x icon-empty-kids'></span></a><span class="navtextsmall">Add Child</span></li>
+                <li><a ng-click="showAddProjectModal()"><span class='kb-25x icon-chore'></span></a><span class="navtextsmall">New Project</span></li>
+            </ul>
+        </div>
+        <ion-tabs ng-if="!isParent()" class="tabs-icon tabs-positive fade-in-not-out" style="overflow:visible;">
+
+            <ion-tab title="Chores" icon-off="icon-chore dark" icon-on="icon-chore positive" ui-sref="app.child-chores">
+                <ion-nav-view name="tab-child-chores"></ion-nav-view>
+            </ion-tab>
+
+            <!-- icon-off="icon-Profile-Nav" icon-on="icon-Profile-Nav" -->
+            <ion-tab title="" icon-off="logoicon" icon-on="logoicon" ui-sref="app.child-dashboard" style="opactity:1!important; z-index: 22; overflow: visible;">
+                <ion-nav-view name="tab-child-dashboard">
+                </ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Earned" icon-off="icon-earned dark" icon-on="icon-earned positive" ui-sref="app.child-earned">
+                <ion-nav-view name="tab-child-earned"></ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+        <ion-tabs ng-if="isParent()" class="tabs-icon tabs-positive fade-in-not-out" style="overflow:visible;">
+            <ion-tab title="Chores2" icon-off="icon-chore dark" icon-on="icon-chore positive" ui-sref="app.parent-chores">
+                <ion-nav-view name="tab-parent-chores"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="" icon-off="logoicon" icon-on="logoicon" ui-sref="app.parent-dashboard" style="opactity:1!important; z-index: 22; overflow: visible;">
+                <ion-nav-view name="tab-parent-dashboard">
+                </ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Children" icon-off="icon-empty-kids dark" icon-on="icon-empty-kids positive" ui-sref="app.parent-children">
+                <ion-nav-view name="tab-parent-children"></ion-nav-view>
+            </ion-tab>
+
+        </ion-tabs>
+        <!-- <ion-nav-view name="menuContent"></ion-nav-view> -->
+    </ion-side-menu-content>
+    <ion-side-menu side="left" id="kbsidemenu">
+        <ion-content scroll="false">
+            <ion-list>
+                <ion-item class="nav-clear col-left positive-bg" ng-if="!isParent()" style="border:0px;">
+
+                    <h3 class="title light" style="padding-top: 40px;">{{ profile.name }}</h3>
+
+                    <h4 ng-if="!isParent()" class="sub-title light">Member ID: {{ memberid }}</h4>
+
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="showProfileModal()">
+                    <i class="icon-roo-icon positive icon-left"></i>&nbsp;My Profile
+                </ion-item>
+
+                <!-- <ion-item ng-if="isParent()" nav-clear menu-close ng-click="showAddChildModal()"> -->
+                    <!-- <i class="icon-Empty-Kids positive icon-left"></i>&nbsp;Add a Child -->
+                <!-- </ion-item> -->
+                <!-- <ion-item ng-if="isParent()" nav-clear menu-close ng-click="showAddProjectModal()"> -->
+                    <!-- <i class="icon-Chores-Nav positive icon-left"></i>&nbsp;New Project -->
+                <!-- </ion-item> -->
+                <ion-item class="item-toggle">
+                    <i class="icon-notification positive icon-left"></i>&nbsp;Send notifications<label class="toggle toggle-assertive">
+       <input type="checkbox" ng-model="profile.preferences.send_notifications">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+                </ion-item>
+                <ion-item ng-click="logout()">
+                    <i class="icon-save positive icon-left"></i>&nbsp;Logout
+                </ion-item>
+                <ion-item class="item-divider">
+
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="showAboutModal()">
+                    <i class="icon-learn positive icon-left"></i>&nbsp;About
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="purchaseOthers()">
+                    <i class="icon-secure positive icon-left"></i>&nbsp;Store
+                </ion-item>
+               
+                <ion-item nav-clear menu-close ng-click="showRatingPrompt()">
+                    <i class="icon-feedback positive icon-left"></i>&nbsp;Rate Our App
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

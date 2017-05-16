@@ -1,0 +1,227 @@
+<ion-modal-view view-title="" ng-controller="signupModalCtrl" class="positive-bg fullscreen_modal">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title positive"></h1>
+        <button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-content id="social-login" class="positive-bg text-center light padding manual-remove-top-padding has-header" ng-class="keyboardActive" has-bouncing="false" style="margin-left: 10px;">
+    <style>
+    .item-is-label {
+        margin-top: 10px; margin-bottom: 0px; border-radius: 4px; border: none;
+    }
+    .item-is-input {
+        color: black;
+        text-align: center; border-radius: 4px; background: none; font-size: 20px; font-weight: 300;
+    }
+    </style>
+        <wizard on-finish="finishedWizard()" hide-indicators="true">
+            <wz-step class="padding">
+                <form name="signupPersonalForm" novalidate="" on-valid-submit="formValidSubmit(signupPersonalForm, 1)">
+                <h2 class="assertive">Create Your Account</h2>
+                <p>Select your gender</p>
+                <div>
+                    <div class="button-bar">
+                        <a class="button button-item1 text-center genderbar {{isActive('item1')}}" ng-click="setActive('item1')"><i class="icon-boy-icon" style="font-size:2em;"></i>Male</a>
+                        <a class="button button-item2 text-center genderbar {{isActive('item2')}}" ng-click="setActive('item2')"><i class="icon-girl" style="font-size:2em;"></i>Female</a> </div>
+                </div>
+                
+                <label ng-if="!isBrowserMode" ng-cloak class="item item-input item-inset item-is-label">
+                    <input type="date" ng-model="params.dob" placeholder="Date of birth" class="birthdate item-is-input">
+                </label>
+                <div class="row date" ng-if="isBrowserMode" ng-cloak>
+                    <!-- <div class="subheader">Birthday</div> -->
+                    <div id="dd2" class="wrapper-dropdown-5 col-33" tabindex="1">{{isEmpty('month')}}{{params.month.name}}
+                        <ul class="dropdown">
+                            <li ng-repeat="m in months" ng-click="setInput('month', m)"><a href="#">{{m.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="dd3" class="wrapper-dropdown-5 col-33" tabindex="1">{{isEmpty('day')}}{{params.day}}
+                        <ul class="dropdown">
+                            <li ng-repeat="d in days" ng-click="setInput('day', d)"><a href="#">{{d}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="dd" class="wrapper-dropdown-5 col-33" tabindex="1">{{isEmpty('year')}}{{params.year}}
+                        <ul class="dropdown">
+                            <li ng-repeat="y in years" ng-click="setInput('year', y)"><a href="#">{{y}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <script>
+                    function DropDown(el) {
+                    this.dd = el;
+                    this.initEvents();
+                    }
+                    DropDown.prototype = {
+                    initEvents: function() {
+                        var obj = this;
+                        obj.dd.on('click', function(event) {
+                            $(this).toggleClass('active');
+                            event.stopPropagation();
+                        });
+                    }
+                    }
+                    $(function() {
+                    var dd = new DropDown($('#dd'));
+                    var dd = new DropDown($('#dd2'));
+                    var dd = new DropDown($('#dd3'));
+                    $(document).click(function() {
+                        // all dropdowns
+                        $('.wrapper-dropdown-5').removeClass('active');
+                    });
+                    });
+                    </script>
+                </div>
+                <div>
+                    <label class="item item-input item-is-label" ng-class="{ 'has-errors' : signupPersonalForm.first_name.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.first_name.$valid && signupPersonalForm.$submitted}">
+                        <input type="text" name="first_name" ng-model="params.first_name" placeholder="First name" ng-minlength="3" class="item-is-input" required>
+                    </label>
+                    <div class="error-container" ng-show="signupPersonalForm.first_name.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.first_name.$error">
+                      <div ng-messages-include="error-list.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="item item-input item-is-label" ng-class="{ 'has-errors' : signupPersonalForm.last_name.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.last_name.$valid && signupPersonalForm.$submitted}">
+                        <input type="text" name="last_name" ng-model="params.last_name" placeholder="Last name" ng-minlength="3" class="item-is-input" required>
+                    </label>
+                    <div class="error-container" ng-show="signupPersonalForm.last_name.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.last_name.$error">
+                      <div ng-messages-include="error-list.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="item item-input item-is-label" ng-class="{ 'has-errors' : signupPersonalForm.email.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.email.$valid && signupPersonalForm.$submitted}">
+                        <input type="email" readonly="readonly" disabled="disabled" name="email" ng-model="params.email" placeholder="Email address" ng-minlength="10" ng-maxlength="35" class="item-is-input" required>
+                    </label>
+                    <div class="error-container" ng-show="signupPersonalForm.email.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.email.$error">
+                      <div ng-messages-include="error-list.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="item item-input item-is-label" ng-class="{ 'has-errors' : signupPersonalForm.password.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.password.$valid && signupPersonalForm.$submitted}">
+                        <input type="password" readonly="readonly" disabled="disabled" name="password" ng-model="params.password" placeholder="Enter a password" ng-minlength="4" ng-maxlength="20" class="item-is-input" required>
+                    </label>
+                    <div class="error-container" ng-show="signupPersonalForm.password.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.password.$error">
+                      <div ng-messages-include="error-list.html"></div>
+                    </div>
+                </div>
+                <button ng-click="next(1)" ng-disabled="inprogress" class="button button-block button-outline button-assertive">Continue</button>
+                <p>Accounts required for all users. Persons under 17 years of age require a verified parent or guardian account used to register yours.
+
+                    <a ng-click="showTermsOfServiceModal();">Terms of Service</a> and <a ng-click="showPrivacyPolicyModal();">Privacy Policy</a>
+                </p>
+                </form>
+            </wz-step>
+            <!-- <wz-step>
+                <form name="signupPersonalForm" novalidate="" on-valid-submit="formValidSubmit(signupPersonalForm, 2)">
+                    <div class="padding text-left" style="height: auto;">
+                        <div>
+                            <div class="positive-bg light" style="border:0;">
+                                <div id="container light">
+                                    <h2 class="text-left assertive">Required information</h2>
+                                    <p>Parents and project posters are required to have a basic profile to use this service. </p>
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : signupPersonalForm.first_name.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.first_name.$valid && signupPersonalForm.$submitted}">
+                                            <input type="text" name="first_name" ng-model="params.first_name" placeholder="First name" ng-minlength="3" required>
+                                        </label>
+                                        <div class="error-container" ng-show="signupPersonalForm.first_name.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.first_name.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : signupPersonalForm.last_name.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.last_name.$valid && signupPersonalForm.$submitted}">
+                                            <input type="text" name="last_name" ng-model="params.last_name" placeholder="Last name" ng-minlength="3" required>
+                                        </label>
+                                        <div class="error-container" ng-show="signupPersonalForm.last_name.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.last_name.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : signupPersonalForm.phone.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.phone.$valid && signupPersonalForm.$submitted}">
+                                            <input type="tel" name="phone" ng-model="params.phone" placeholder="(___) ___-____" ui-mask="(999) 999-9999" ng-minlength="11" ng-maxlength="14" required>
+                                        </label>
+                                        <div class="error-container" ng-show="signupPersonalForm.phone.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.phone.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                
+                                    <h2 class="assertive">Login Credentials</h2>
+                                    <p class="text-left light">A valid email is required to access your account.</p>
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : signupPersonalForm.email.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.email.$valid && signupPersonalForm.$submitted}">
+                                            <input type="email" name="email" ng-model="params.email" placeholder="Email address" ng-minlength="10" ng-maxlength="35" required>
+                                        </label>
+                                        <div class="error-container" ng-show="signupPersonalForm.email.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.email.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : signupPersonalForm.password.$invalid && signupPersonalForm.$submitted, 'no-errors' : signupPersonalForm.password.$valid && signupPersonalForm.$submitted}">
+                                            <input type="password" name="password" ng-model="params.password" placeholder="Enter a password" ng-minlength="4" ng-maxlength="20" required>
+                                        </label>
+                                        <div class="error-container" ng-show="signupPersonalForm.password.$error && signupPersonalForm.$submitted" ng-messages="signupPersonalForm.password.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button style="border:0;" class="button button-clear button-assertive text-left col" wz-previous>Go Back</button>
+                                        <button style="border:0;" class="button button-clear button-assertive text-right col" type="submit">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </wz-step> -->
+            <wz-step wz-title="isTeen" wz-disabled="false">
+                <form name="signupAddressForm" novalidate="" on-valid-submit="formValidSubmit(signupAddressForm, 3)">
+                    <div class="padding text-left" style="height: auto;">
+                        <div>
+                            <div class="positive-bg light" style="border:0;">
+                                <div id="container light">
+
+                                    <h2 class="text-left assertive">Required information</h2>
+                                    <p>Teens are required to have a basic profile to use this service. </p>
+                                    <div>
+                                        <label class="item item-input">
+                                           <input type="text" ng-class="{ 'has-errors' : signupAddressForm.address.$invalid && signupAddressForm.$submitted, 'no-errors' : signupAddressForm.address.$valid && signupAddressForm.$submitted}" name="address" placeholder="Enter your Address" google-autocomplete-suggestion location="data.location" country-code="{{countryCode}}" on-selection="onAddressSelection(location)" ng-model="data.location.formatted_address" ng-minlength="10" ng-maxlength="80" readonly required>
+                                        </label>
+                                        <div class="error-container" ng-show="signupAddressForm.address.$error && signupAddressForm.$submitted" ng-messages="signupAddressForm.address.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="row">
+                                        <button style="border:0;" class="button button-clear button-assertive text-left col" wz-previous>Go Back</button>
+                                        <button style="border:0;" class="button button-clear button-assertive text-right col" type="submit">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </wz-step>
+            <wz-step wz-title="finished">
+                <div class="padding" style="height: auto;">
+                    <div class="actioncard positive-bg light">
+                        <div class="positive-bg">
+                            <div id="container light">
+                                <h2 class="text-left assertive">
+                                    Just one more step
+                                    </h2>
+                                <div class="row">
+                                    <p class="text-center light">Your account is now created. You still need to verify your email using the link we emailed you before your account is activated.</p>
+                                </div>
+                                <button class="button button-block button-assertive row col text-center" ng-click="modal.hide()">Return to sign in</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wz-step>
+        </wizard>
+    </ion-content>
+
+    <!--end login content section-->
+</ion-modal-view>

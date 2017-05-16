@@ -1,0 +1,27 @@
+<ion-modal-view ng-controller="reportCtrl">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title positive"></h1>
+        <button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+
+    <ion-content class="padding positive-bg">
+        <div class="list">
+            <div class="list list-inset positive-bg">
+                <h2 class="assertive">Report an Issue</h2>
+                <p class="light">We appreciate your feedback. Let us know how we are doing or if you encounter an issue using the Kidz Force mobile application..</p>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input">
+         <input type="text" ng-model="params.title" placeholder="Enter a subject">
+         </label>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input">
+                   <textarea rows="4" cols="50" ng-model="params.body" placeholder="Enter your feedback here">
+                   </textarea>
+                 </label>
+            </div>
+            <button ng-click="sendReport()" class="button button-block button-outline button-assertive">Send</button>
+        </div>
+    </ion-content>
+</ion-modal-view>

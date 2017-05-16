@@ -1,0 +1,89 @@
+
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <!-- <div class="buttons">
+         <button class="button button-clear icon ion-ios-arrow-left" ng-click="modal.hide()"></button>
+         </div> -->
+        <h1 class="title"></h1>
+        <button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-pane ng-controller="rewardCtrl">
+        <ion-tabs class="tabs-top">
+            <!-- Tab 1 -->
+            <ion-tab title="REWARDS">
+                <ion-nav-view name="tab-tab1">
+                    <ion-content>
+                        <div class="card text-center">
+                            <div class="item item-text-wrap">
+                                <div class="row">
+                                    <div class="tabtext">
+
+                                        <div class="icon"><i class="icon-earned icon-circle-largewidth"></i></div>
+
+                                        <h2 class="iconmargin">{{ balance.points || '0' }} Points Available</h2>
+                                    </div>
+                                </div>
+                                <p>Redeem your Points for
+                                    <strong>GYFT.com</strong> rewards cards</p>
+                            </div>
+                        </div>
+                        <div ng-repeat="(key, value) in rewards">
+
+                            <div class="card text-left col-50 flipInY animated" style="float: left; margin:0px;">
+                                <div class="item" style="margin:0px;">
+                                    <div class="row">
+                                        <div class="tabtext">
+                                            <div class="item" style="padding:8px;"><img ng-src="{{value.merchant_icon_image_url_hd}}" class="full-image" /></div>
+
+                                        </div>
+                                    </div>
+                                    <h3 class="text-center">{{value.merchant_name}}</h3>
+                                    <h4 class="text-center">{{value.opening_balance*10}}<H4>POINTS<h4>
+                              <a class="button button-outline button-positive button-block text-uppercase" ng-click="redeemReward(value.id)" ng-disabled="balance.points<=(value.opening_balance*10)">Redeem</a>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- </div> -->
+                        <ion-infinite-scroll on-infinite="reload()">
+                        </ion-infinite-scroll>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <ion-tab title="RANKING">
+                <ion-nav-view name="tab-tab1">
+                    <ion-content>
+                        <div class="list">
+                        <div class="item item-text-wrap text-center">
+                            <div class="row">
+                              <div class="tabtext">
+                                  <div class="icon "><i class="icon-tie icon-circle-largewidth"></i></div>
+                                  <h2 class="iconmargin">{{ balance.rank || 'Associate' }}</h2>
+                              </div>
+                            </div>
+                            <p>Your title gives you certain capabilities and offerings that are just for you. Keep it up and continue collecting positive reviews and achievements to rank higher and unlock the next level in your community.</p>
+                        </div>
+                        <div ng-if="reviews.length==0" id="nonotification" class="text-center col-75 col-offset-10">
+                          <h3 class="dark subdued" style="margin-bottom:-20px;">No reviews</h3>
+                          <h4 class="dark subdued">When new reviews occur they will be shown here.</h4>
+                        </div>
+                        <div ng-if="reviews.length!=0" class="item item-divider"></div>
+                        <!-- {{reviews}} -->
+                        <a class="item" ng-repeat="(key, reviewObject) in reviews" ng-click="showProjectViewModal(projects[reviewObject.project].$id)" ng-if="projects[reviewObject.project]">
+                          <div class="row">
+                            <div class="col">
+                              <h3>{{projects[reviewObject.project].name | capitalize}}</h3>
+                              <p>Project completed {{ showLocalizedDate(projects[reviewObject.project].end_date * 1, projects[reviewObject.project].timezone) | date : "M/d 'at' h:mm a" }}</p>
+                              <div class="col assertive">
+                                <rating ng-model="reviewObject.adultRating" max="5" readonly="true"></rating>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+    </ion-pane>
+</ion-modal-view>

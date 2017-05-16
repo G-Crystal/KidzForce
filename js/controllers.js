@@ -1,0 +1,2 @@
+var appControllers = angular.module('kb.controllers', ['ngStorage', 'ionic.ion.headerShrink', 'firebase', 'ngCordovaOauth', 'ion-google-autocomplete']); // Use for all controller of application.
+var appServices = angular.module('kb.services', []);// Use for all service of application.

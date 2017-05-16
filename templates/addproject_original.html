@@ -1,0 +1,164 @@
+<ion-modal-view>
+<ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title positive"></h1>
+        <button class="button" ng-click="modal.hide()"><i class="icon-close"></i></button> 
+    </ion-header-bar>
+<ion-content scroll="true">
+<ng-controller ng-controller="addProjectCtrl" ng-init="loadExistingProject()">
+<wizard on-finish="addProject()" hide-indicators="true">
+    <wz-step wz-title="info">
+      <form name="addProjectFirstStep" novalidate="" on-valid-submit="formValidSubmit(addProjectFirstStep, 1)">
+        <div class="list">
+          <div class="item">
+            <div class="button-bar">
+             <a class="button button-item1 text-center genderbar" ng-class="isActiveClass('public')" ng-click="setActive('public')"><i class="icon-public" style="font-size:2em; line-height:1em;"></i>Public</a>
+             <a class="button button-item2 text-center genderbar" ng-class="isActiveClass('invite')" ng-click="setActive('invite')"><i class="icon-child-id" style="font-size:2em; line-height:1em;"></i>Invite</a>
+            </div>
+          </div>
+          <div class="list list-inset" ng-if="isActive('invite')">
+            <label class="item item-input" ng-class="{ 'has-errors' : addProjectFirstStep.child_id.$invalid && isActive('invite') && addProjectFirstStep.$submitted, 'no-errors' : addProjectFirstStep.child_id.$valid && isActive('invite') && addProjectFirstStep.$submitted}">
+
+              <input type="text" name="child_id" ng-model="project.member_id" placeholder="___-___-___" ui-mask="999-999-999" ng-minlength="5" ng-maxlength="12" required>
+            </label>
+            <div class="error-container" ng-show="addProjectFirstStep.child_id.$error && addProjectFirstStep.$submitted && isActive('invite')" ng-messages="addProjectFirstStep.child_id.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+            <div class="item" ng-if="!isBrowserMode">
+              <button class="button button-positive button-block" ng-click="scanCard()">Scan Member Card</button>
+            </div>
+          </div>
+          <div>
+            <label class="item item-input" ng-class="{ 'has-errors' : addProjectFirstStep.title.$invalid && addProjectFirstStep.$submitted, 'no-errors' : addProjectFirstStep.title.$valid && addProjectFirstStep.$submitted}">
+              <input type="text" name="title" ng-model="project.title" placeholder="Project Title" ng-minlength="5" ng-maxlength="40" required>
+            </label>
+            <div class="error-container" ng-show="addProjectFirstStep.title.$error && addProjectFirstStep.$submitted" ng-messages="addProjectFirstStep.title.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+          <h3 class="energized text-center hide-on-keyboard-open">Or Select a Popular Chore</h3>
+          <!-- <div class="item"> -->
+            <a ng-repeat="(key,value) in popularItems" class="item item-thumbnail-left hide-on-keyboard-open" ng-click="selectPreset(value)">
+              <img src="{{value.image}}">
+              <h2>{{value.title}}</h2>
+              <p class="balanced">${{value.price}}+</p>
+              <p class="energized">Minimum age {{value.minimum_age}}+</p>
+            </a>
+          <!-- </div> -->
+        </div>
+
+        <button class="button button-positive button-block" type="submit">Continue</button>
+      </form>
+    </wz-step>
+    <wz-step wz-title="photo">
+      <div class="list">
+        <div class="item">
+          <button class="button button-positive button-block" ng-click="pickPhoto()">Choose your own</button>
+          <input type="file" name="photo" id="project_photo" ng-model="file" on-file-change="photoChanged" style="width:0;height:0;opacity: 0;"/>
+        </div>
+        <div class="item">
+          <button class="button button-positive button-block" ng-click="skipPhoto()" wz-next>Skip photo</button>
+        </div>
+        <div class="item" ng-show="project.photo!=''">
+          <img src="{{project.photo}}" style="width:250px;height:250px;max-height: 250px;max-width: 250px;margin:0 auto;display:block;" />
+        </div>
+        <div class="item photothumb" ng-show="project.photo==''">
+          <div ng-repeat="(key,value) in relatedItems" ng-click="selectPhoto('{{value.thumbnailUrl}}')" wz-next style="width:105px; height:105px; float:left; display:inline-block; margin-right: 10px; margin-bottom:10px; background-image: url({{value.thumbnailUrl}}); background-repeat:no-repeat; background-size: 105px 105px;">
+          </div>
+        </div>
+      </div>
+        <div>
+          <div class="button-bar slider-button-bar">
+           <a class="button button-item1 text-center button-assertive" wz-previous>Back</a>
+           <a class="button button-item2 text-center button-positive" wz-next>Next</a>
+          </div>
+        </div>
+    </wz-step>
+    <wz-step wz-title="schedule">
+      <form name="addProjectThirdStep" novalidate="" on-valid-submit="formValidSubmit(addProjectThirdStep, 3)">
+        <div class="list" ng-if="!isBrowser()">
+          <div>
+            <label class="item item-icon-left" ng-click="getDateTest()" ng-class="{ 'has-errors' : addProjectThirdStep.date.$invalid && addProjectThirdStep.$submitted, 'no-errors' : addProjectThirdStep.date.$valid && addProjectThirdStep.$submitted}">
+              <i class="icon ion-android-calendar"></i>
+              <span ng-show="project.date==''">Enter date</span>
+              <span ng-show="project.date!=''" ng-bind="project.date | date : 'longDate'"></span>
+              <input type="hidden" name="date" ng-model="project.date" ng-minlength="8" ng-maxlength="15" required/>
+            </label>
+            <div class="error-container" ng-show="addProjectThirdStep.date.$error && addProjectThirdStep.$submitted" ng-messages="addProjectThirdStep.date.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+          <div>
+            <label class="item item-icon-left" ng-click="pickTime()" ng-class="{ 'has-errors' : addProjectThirdStep.time.$invalid && addProjectThirdStep.$submitted, 'no-errors' : addProjectThirdStep.time.$valid && addProjectThirdStep.$submitted}">
+              <i class="icon ion-android-time"></i>
+              <span ng-show="project.time==''">Enter time</span>
+              <span ng-show="project.time!=''" ng-bind="project.time | date : 'shortTime'"></span>
+              <input type="hidden" name="time" ng-model="project.time" ng-minlength="8" ng-maxlength="15" required/>
+            </label>
+            <div class="error-container" ng-show="addProjectThirdStep.date.$error && addProjectThirdStep.$submitted" ng-messages="addProjectThirdStep.date.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-bar slider-button-bar">
+          <a class="button button-item1 text-center button-assertive" wz-previous>Back</a>
+          <a class="button button-item2 text-center button-positive" ng-disabled="!validate(3)" wz-next>Next</a>
+        </div>
+      </form>
+    </wz-step>
+    <wz-step wz-title="payment">
+      <form name="addProjectLastStep" novalidate="" on-valid-submit="formValidSubmit(addProjectLastStep, 4)">
+        <div class="list">
+          <div>
+            <div class="item">
+              <h1 class="text-center balanced">$<span ng-bind="project.price">10</span></h1>
+            </div>
+          </div>
+          <div>
+            <div class="item range">
+              <i class="icon ion-social-usd-outline"></i>
+              <input type="range" style="border:0px;" ng-model="project.price" name="price" min="5" value="10" max="100">
+              <i class="icon ion-social-usd"></i>
+            </div>
+          </div>
+          <div>
+            <div class="item">
+              <h2 class="text-center">Minimum age: <span ng-bind="project.age_range">7</span></h2>
+              <h1 class="text-center" style="color:red;" ng-if="project.age_range <= 9">No Indoor chores</h1>
+              <h1 class="text-center" style="color:red;" ng-if="project.age_range <= 13 && project.age_range >= 10">No power tools</h1>
+              <h1 class="text-center balanced" ng-if="project.age_range >= 14">All chores</h1>
+            </div>
+          </div>
+          <div>
+            <div class="item range">
+              <i class="icon ion-android-person"></i>
+              <input type="range" style="border:0px;" ng-model="project.age_range" name="age_range" min="7" value="9" max="17">
+              <i class="icon ion-android-people"></i>
+            </div>
+          </div>
+          <div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : addProjectLastStep.description.$invalid && addProjectLastStep.$submitted, 'no-errors' : addProjectLastStep.description.$valid && addProjectLastStep.$submitted}">
+              <span class="input-label">Description</span>
+              <input style="width:90%;" type="text" name="description" ng-model="project.description" placeholder="" ng-minlength="10" ng-minlength="255">
+            </label>
+            <div class="error-container" ng-show="addProjectLastStep.description.$error && addProjectLastStep.$submitted" ng-messages="addProjectLastStep.description.$error">
+              <div ng-messages-include="error-list.html"></div>
+            </div>
+          </div>
+          <div>
+            <div class="item item-text-wrap">
+              <p>There is a 20% service fee charged by KidzForce. Make sure all entries are correct.</p>
+            </div>
+          </div>
+        </div>
+        <div class="button-bar">
+          <a class="button button-item1 text-center button-assertive" wz-previous>Back</a>
+          <button class="button button-item2 text-center button-positive" type="submit">Complete</button>
+        </div>
+      </form>
+    </wz-step>
+</wizard>
+</ng-controller>
+
+</ion-content>
+</ion-modal-view>

@@ -1,0 +1,74 @@
+<ion-modal-view view-title="" ng-controller="signupIdentityModalCtrl">
+    <ion-header-bar ng-if="currentIndex==0" class="bar bar-header bar-positive">
+        <h1 class="title positive"></h1>
+        <button class="button" ng-click="verifyIdentityModal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-content id="social-login" class="positive-bg padding">
+        <wizard on-finish="submit()" hide-indicators="true">
+            <wz-step wz-title="address">
+                <form name="verifyIdentityFormFirstStep" novalidate="" on-valid-submit="formValidSubmit(verifyIdentityFormFirstStep, 1)">
+                    <div class="list actioncard light animated" style="margin-top: 5%;">
+                        <div class="item item-text-wrap positive-bg light" style="border:0;">
+                            <div id="containerlight" style="margin-top:40px;">
+                                <h1 class="text-left assertive">Your Home Address</h1>
+                                <h3 class="light">We will use your address as the home address for all chores posted. <br/><br/>
+
+        Standard text messaging fees apply to all notifications sent to the mobile phone number provided.</h3>
+                                <div class="list">
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : verifyIdentityFormFirstStep.address.$invalid && verifyIdentityFormFirstStep.$submitted, 'no-errors' : verifyIdentityFormFirstStep.address.$valid && verifyIdentityFormFirstStep.$submitted}">
+                                            <input type="text" name="address" placeholder="Enter your Address" google-autocomplete-suggestion location="data.location" country-code="{{countryCode}}" on-selection="onAddressSelection(location)" ng-model="data.location.formatted_address" readonly required>
+
+                                        </label>
+                                        <div class="error-container" ng-show="verifyIdentityFormFirstStep.address.$error && verifyIdentityFormFirstStep.$submitted" ng-messages="verifyIdentityFormFirstStep.address.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : verifyIdentityFormFirstStep.phone.$invalid && verifyIdentityFormFirstStep.$submitted, 'no-errors' : verifyIdentityFormFirstStep.phone.$valid && verifyIdentityFormFirstStep.$submitted}">
+                                            <input type="text" name="phone" ng-model="params.phone" placeholder="(___) ___-____" ui-mask="(999) 999-9999" ng-minlength="11" ng-maxlength="14" required>
+                                        </label>
+                                        <div class="error-container" ng-show="verifyIdentityFormFirstStep.phone.$error && verifyIdentityFormFirstStep.$submitted" ng-messages="verifyIdentityFormFirstStep.phone.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="button button-block button-assertive" type="submit">CONTINUE</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </wz-step>
+            <wz-step wz-title="social">
+                <form name="verifyIdentityFormSecondStep" novalidate="" on-valid-submit="formValidSubmit(verifyIdentityFormSecondStep, 2)">
+                    <div class="list actioncard light" style="margin-top: 5%;">
+                        <div class="item item-text-wrap positive-bg light" style="border:0;">
+                            <div id="containerlight" style="margin-top:40px;">
+                                <h1 class="text-center assertive">Personal Identity Verification</h1>
+                                <div class="list">
+                                    <div>
+                                        <label class="item item-input" ng-class="{ 'has-errors' : verifyIdentityFormSecondStep.ssn.$invalid && verifyIdentityFormSecondStep.$submitted, 'no-errors' : verifyIdentityFormSecondStep.ssn.$valid && verifyIdentityFormSecondStep.$submitted}">
+                                            <input type="number" name="ssn" ng-model="params.ssn" placeholder="Last 4 Digits of SSN" ng-minlength="4" ng-maxlength="4" required>
+                                       </label>
+                                       <div class="error-container" ng-show="verifyIdentityFormSecondStep.phone.$error && verifyIdentityFormSecondStep.$submitted" ng-messages="verifyIdentityFormSecondStep.phone.$error">
+                                          <div ng-messages-include="error-list.html"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <ion-checkbox ng-model="params.tos">I agree to our Terms of Service and Privacy Policy. </ion-checkbox>
+                                    </div>
+                                </div>
+                                <button class="button button-block button-assertive" type="submit">SUBMIT</button>
+                                <br/>
+                                <button class="button button-clear button-assertive text-left" style="border:0;" wz-previous>BACK</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </wz-step>
+        </wizard>
+    </ion-content>
+    <!--end login content section-->
+</ion-modal-view>
+<!-- <ion-google-place id="test" placeholder="Enter an address, Apt# and ZIP" ng-model="params.address" current-location="true" /> -->

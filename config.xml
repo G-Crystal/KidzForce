@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.riveloper.KIDZ-BIZ-101" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Badge">
+        <param name="browser-package" value="Badge" />
+    </feature>
+    <feature name="Camera">
+        <param name="browser-package" value="Camera" />
+    </feature>
+    <feature name="BarcodeScanner">
+        <param name="browser-package" value="BarcodeScanner" />
+    </feature>
+    <name>KIDZFORCE</name>
+    <description>
+        KIDZ FORCE
+    </description>
+    <author email="info@riveloper.com" href="http://riveloper.com/">
+      Riveloper
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <access launch-external="yes" origin="tel:*" />
+    <access launch-external="yes" origin="maps:*" />
+    <access launch-external="yes" origin="geo:*" />
+    <allow-navigation href="*" />
+    <allow-navigation href="http://192.168.1.197:8100" />
+    <allow-navigation href="http://192.168.1.197:8101" />
+    <allow-navigation href="http://192.168.5.181:8100" />
+    <allow-navigation href="http://192.168.3.141:8100" />
+    <allow-navigation href="http://10.0.1.7:8100" />
+    <allow-navigation href="http://192.168.1.197:8102" />
+    <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="6000" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="FadeSplashScreenDuration" value="0" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="false" />
+</widget>

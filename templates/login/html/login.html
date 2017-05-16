@@ -1,0 +1,46 @@
+<ion-view view-title="">
+<ion-content scroll="false" overflow-scroll="true" id="social-login" class="positive-bg ">
+<div id="brandlogo" class="keyboard-active">
+	<img src="img/kb101-logo.svg"/>
+</div>
+<div id="containerlight">
+	<form name="authorizationForm" novalidate="" on-valid-submit="attemptLogin(authorizationForm)">
+		<div class="">
+			<!-- <div class="list"> -->
+			<h4 class="light text-center">Login or sign up</h4>
+			<!-- </div> -->
+			<!-- <div class="list"> -->
+			<div class="row">
+				<div class="col padding">
+					<a ng-click="attemptFacebookLogin()" class="button icon-left button-block light" style="background-color:#3b5998"><i class="icon ion-social-facebook padding" ></i>Facebook</a>
+				</div>
+				<div class="col padding">
+					<a ng-click="attemptGoogleLogin()" class="button icon icon-left button-block light" style="background-color:#dd4b39;"><i class="ion-social-googleplus icon padding"></i>Google</a>
+				</div>
+			</div>
+			<!-- </div> -->
+			
+			<!-- <div class="list list-inset"> -->
+			<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.username.$valid && authorizationForm.$submitted}">
+				<input class="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" ng-model="login.username" name="username" placeholder="Email or Username" ng-minlength="3" required>
+			</label>
+			<!-- </div> -->
+			<!-- <div class="list list-inset"> -->
+			<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="password" ng-model="login.password" name="password" placeholder="Password" ng-minlength="4" required>
+			</label>
+			<!-- </div> -->
+			<!-- <h2 class="text-right light"><a ng-click="showForgotPassword()">Forgot Password?&nbsp;</a></h2> -->
+			
+			<!-- <div class="list"> -->
+			<button type="submit" class="button button-block button-outline button-assertive" ng-disabled="!authorizationForm.username.$valid || !authorizationForm.password.$valid">Continue</button>
+			<!-- </div> -->
+		</div>
+	</form>
+	<p class="light text-center" style="z-index: 24;"><a ng-click="showTermsOfServiceModal()">Terms of Service</a> and <a ng-click="showPrivacyPolicyModal()">Privacy Policy</a></p>
+	<p class="light text-center">Version: {{version}} Build: {{build}}</p>
+</div>
+</ion-content>
+<!-- <div id="roo" class="animated infinite bounce" ></div> -->
+<!--end login content section-->
+</ion-view>

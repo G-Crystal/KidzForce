@@ -1,0 +1,261 @@
+<!--This is a main HTML file of project default page when application start.-->
+<!--All reference of css and javascript lib is here.-->
+
+<!DOCTYPE html>
+<html>
+
+<!--head section This is a place of all reference of css and javascript lib-->
+
+<head>
+    <!-- Meta section -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'unsafe-eval';"> -->
+    <!-- To disable phone number typing.-->
+    <!-- end Meta section -->
+    <title></title>
+
+    <!-- Font reference section -->
+    <!-- <link rel="stylesheet" href="lib/robotodraft/robotodraft.css"> -->
+    <!-- end Font reference section -->
+
+    <!-- CSS reference section -->
+    <link rel="stylesheet" href="dist/style.css">
+    <link rel="stylesheet" href="dist/fullscreen-modal.min.css">
+
+    <link href="lib/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="lib/angular-ios-actionsheet/src/angular-ios-actionsheet.css" rel="stylesheet" type="text/css" />
+    <!-- end CSS reference section -->
+
+    <!-- Ionic javascript lib -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- end Ionic javascript lib -->
+
+    <!-- Angular javascript lib -->
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <!-- end Angular javascript lib -->
+
+    <!-- Angular/Firebase lib -->
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/firebase/angular-firebase.min.js"></script>
+    <!-- end Angular/Firebase lib -->
+
+    <!-- GeoFire -->
+    <script src="lib/geofire/geofire.min.js"></script>
+
+    <!-- Cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="lib/ngStorage/ngstorage.min.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- end Cordova script -->
+
+    <script src="lib/ionic-rating/ionic-rating.js"></script>
+
+    <script src="lib/ionic-ion-header-shrink/ionic.headerShrink.js"></script>
+
+    <!-- ngCordovaOauth -->
+    <script src="lib/ng-cordova-oauth/ng-cordova-oauth.min.js"></script>
+    <!-- end ngCordovaOauth -->
+
+
+    <!--ionic framework ngIOS9UIWebViewPatch-->
+    <!--Learn more about ngIOS9UIWebViewPatch at : http://blog.ionic.io/ios-9-potential-breaking-change/-->
+    <script src="lib/ngIOS9UIWebViewPatch/angular-ios9-uiwebview.patch.js"></script>
+    <!--end ionic framework ngIOS9UIWebViewPatch-->
+
+    <!-- <script src="dist/scripts.js"></script> -->
+    <!-- app.js section-->
+    <script src="js/app.js"></script>
+    <!-- end app.js section-->
+
+    <!-- Controllers section-->
+    <script src="js/shared/constant.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/shared/directives.js"></script>
+    <script src="js/shared/filter.js"></script>
+
+    <script src="templates/menu/js/controllers.js"></script>
+
+    <!-- Auth section -->
+    <script src="js/auth/login.controller.js"></script>
+    <script src="js/auth/signupmodal.controller.js"></script>
+    <script src="js/auth/identitymodal.controller.js"></script>
+    <!-- end Auth section -->
+
+    <!-- Controller section -->
+    <script src="js/controllers/notifications.controller.js"></script>
+    <script src="js/controllers/rewards.controller.js"></script>
+    <script src="js/controllers/checkin.controller.js"></script>
+    <script src="js/controllers/chores.controller.js"></script>
+    <script src="js/controllers/profile.controller.js"></script>
+    <script src="js/controllers/add_project.controller.js"></script>
+    <script src="js/controllers/add_child.controller.js"></script>
+    <script src="js/controllers/children.controller.js"></script>
+    <script src="js/controllers/report.controller.js"></script>
+    <script src="js/controllers/reviews.controller.js"></script>
+    <script src="js/controllers/intro.controller.js"></script>
+    <script src="js/controllers/helpme.controller.js"></script>
+    <script src="js/controllers/web.controller.js"></script>
+    <script src="js/controllers/view_project.controller.js"></script>
+    <!-- end Controller section -->
+
+    <!-- end Controllers section -->
+
+    <!-- Services section -->
+    <script src="js/services/notifications.service.js"></script>
+    <script src="js/services/child.service.js"></script>
+    <script src="js/services/children.service.js"></script>
+    <script src="js/services/parent.service.js"></script>
+    <script src="js/services/auth.service.js"></script>
+    <script src="js/services/products.service.js"></script>
+    <script src="js/services/project.service.js"></script>
+    <!-- end Services section -->
+    
+    <script src="dist/fullscreen-modal.min.js"></script>
+    <!-- <script src="dist/rdd.js"></script> -->
+
+    <script src="templates/menu/js/controllers.js"></script>
+
+    <!-- jQuery section-->
+    <script src="lib/jQuery/jquery.js"></script>
+    <!-- end jQuery section-->
+
+    <!-- Google Maps -->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBCZvV8YTD4AyESm5IG-S0phuwzAKe0fmA&libraries=places&sensor=true"></script>
+    <!-- <script src="lib/google-maps/googlemaps.js"></script> -->
+    <!-- end Google Maps -->
+
+    <!-- Google Autocomplete Location -->
+    <script src="lib/ion-google-autocomplete/ion-google-autocomplete.js"></script>
+    <!-- end Google Autocomplete Location -->
+
+    <!-- Angular Animate -->
+    <script src="lib/angular-animate/angular-animate.min.js"></script>
+    <!-- end Angular Animate -->
+
+    <!-- Qrious ( Barcode Generator ) -->
+    <script src="lib/barcode-generator/qrious.min.js"></script>
+    <!-- end Qrious ( Barcode Generator ) -->
+
+    <!-- Geolocation Marker -->
+    <!-- <script src="lib/geolocation-marker/geolocation-marker.js"></script> -->
+    <!-- end Geolocation Marker -->
+
+    <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+    <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+
+    <script src="lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+    <link href="lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
+
+    <!-- <script src="lib/angular-wizard-angular-wizard/dist/angular-wizard.min.js"></script> -->
+    <script type="text/javascript" src="lib/angular-wizard/angular-wizard.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/angular-wizard/angular-wizard.css">
+    <script src="lib/onezone-datepicker.min.js"></script>
+    <script type="text/javascript" src="lib/angular-ui-mask/dist/mask.js"></script>
+    
+
+    <script type="text/javascript" src="lib/moment/moment-with-locales.js"></script>
+    <script type="text/javascript" src="lib/moment/moment-timezone-with-data.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+
+    <script src="http://rawgit.com/nmccready/angular-simple-logger/master/dist/angular-simple-logger.js"></script>
+
+    <script type="text/javascript" src="lib/angular-googlemaps.js"></script>
+
+    <!-- <script type="text/javascript" src="http://kidzforce.com/js/mobile.js"></script> -->
+
+
+    <script type="text/javascript" src="rdd/Box2dWeb-2.1.a.3.js"></script>
+    <script type="text/javascript" src="rdd/js-inherit.js"></script>
+    <script type="text/javascript" src="rdd/Stratiscape.js"></script>
+    <script type="text/javascript" src="rdd/qlinqo.js"></script>
+    <script type="text/javascript" src="rdd/sfx-interface.js"></script>
+    <script type="text/javascript" src="rdd/Stats.js"></script>
+    <script type="text/javascript" src="rdd/fireworks.js"></script>
+    <script type="text/javascript" src="rdd/rdd.controller.js"></script>
+
+
+    <script src="lib/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+    <script src="lib/angular-ios-actionsheet/src/angular-ios-actionsheet.js"></script>
+
+</head>
+<!-- end head section-->
+
+<!--body section-->
+
+<body ng-app="kb" class="hide-native-scroll-y platform-browser platform-cordova platform-webview">
+
+    <!--Custom Style section-->
+    <style type="text/css">
+        {{customStyle}}
+        .scroll-bar-indicator
+{
+display: none;
+}
+
+form i.icon.error {
+  color: $assertive;
+}
+
+form input + i.icon.error {
+  display: none;
+  margin-right: 10px;
+}
+
+form.ng-submitted input.ng-invalid + i.icon.error {
+  display: block;
+}
+
+form .has-error {
+  border-left: 5px solid #ff0c05 !important;
+}
+
+form .has-success {
+  border-left: 5px solid #04ba2b !important;
+}
+
+form.ng-submitted input.ng-valid + i.icon.error {
+  display: none;
+}
+
+.keyboard-active {
+    height: calc(100vh - 216px);
+}
+    </style>
+    <!-- end Custom Style section-->
+
+    <!-- Ionic navigation bar section-->
+    <ion-nav-view></ion-nav-view>
+    <!-- end Ionic navigation bar section-->
+
+<script id="error-list.html" type="text/ng-template">  
+    <div class="error" ng-message="required">
+      <i class="ion-information-circled"></i> 
+      This field is required!
+    </div>
+    <div class="error" ng-message="minlength">
+      <i class="ion-information-circled"></i> 
+      Minimum length of this field is 5 characters!
+    </div>
+    <div class="error" ng-message="maxlength">
+      <i class="ion-information-circled"></i> 
+      Maximum length of this field is 20 characters!
+    </div>
+    <div class="error" ng-message="email">
+      <i class="ion-information-circled"></i> 
+      Must be a valid email!
+    </div>
+    <div class="error" ng-message="number">
+      <i class="ion-information-circled"></i> 
+      Must be a valid number!
+    </div>
+</script> 
+
+</body>
+<!-- end body section-->
+
+</html>

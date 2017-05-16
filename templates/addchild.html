@@ -1,0 +1,66 @@
+<ion-modal-view cache-view="false" style="background-color: #3d026e;">
+	<ion-header-bar class="bar bar-header bar-positive">
+	<h1 class="title positive"></h1>
+	<button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+	</ion-header-bar>
+	<ion-content cache-view="false" scroll="true" overflow-scroll="true" ng-controller="addChildCtrl">
+		<div class="container">
+			<div class="fs-form-wrap" id="fs-form-wrap">
+				<div class="fs-title">
+					<h2 class="light"></h2>
+				</div>
+				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
+					<ol class="fs-fields">
+<!-- 						<li data-input-trigger>
+							<h3 class="fs-field-label fs-anim-upper light">What's your child's gender?</h3>
+							<div class="fs-anim-lower">
+					          <div class="button-bar">
+					           <a class="button button-item1 text-center genderbar" ng-class="isActiveClass('boy')" ng-click="setActive('boy')"><i class="icon-boy-icon" style="font-size:2em; line-height: 1em;border: 1px solid white;"></i>Male</a>
+					           <a class="button button-item2 text-center genderbar" ng-class="isActiveClass('girl')" ng-click="setActive('girl')"><i class="icon-Girl" style="font-size:2em; line-height: 1em;border: 1px solid white;"></i>Female</a>
+					          </div>
+					        </div>
+						</li> -->
+						<li class="keyboard-hide">
+						<!-- {{child}} -->
+							<label class="fs-field-label fs-anim-upper" for="q5">What's your child's gender?</label>
+							<div class="fs-anim-lower">
+					          <div class="button-bar">
+					           <a class="button button-item1 text-center genderbar" ng-class="isActiveClass('boy')" ng-click="setActive('boy')" style="border: 1px solid white;"><i class="icon-boy-icon" style="font-size:2em; line-height: 1em;"></i>Male</a>
+					           <a class="button button-item2 text-center genderbar" ng-class="isActiveClass('girl')" ng-click="setActive('girl')" style="border: 1px solid white;"><i class="icon-girl" style="font-size:2em; line-height: 1em;"></i>Female</a>
+					          </div>
+					        </div>
+							
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q5">What's your child's name?</label>
+							<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" ng-model="child.name" type="text" placeholder="" ng-minlength="3" required/>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q5">What's your child's phone number?</label>
+							<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" type="text" inputmode="numeric" name="phone" ng-model="child.phone" model-view-value="true" ui-mask="(999) 999-9999" required/>
+						</li>
+						<li ng-if="!isBrowserMode">
+							<label class="fs-field-label fs-anim-upper" for="q5">What's your child's birthday?</label>
+							<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" style="background-color:transparent;" ng-model="child.birthdate" type="date" birthdate required/>
+						</li>
+						<li ng-if="isBrowserMode">
+							<label class="fs-field-label fs-anim-upper" for="q5">What's your child's birthday?</label>
+							<datepicker date-format="longDate">
+							  <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower date" ng-model="child.birthdate" type="text" birthdate required/>
+							</datepicker>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q5">Create a username for your child</label>
+							<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" type="text" name="username" ng-model="child.username" ng-minlength="5" ng-maxlength="10" required/>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q5">Create a pin for your child</label>
+							<input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fs-anim-lower" type="text" pattern="[0-9]*" inputmode="numeric" name="pin" ng-model="child.pin" model-view-value="true" ui-mask="9999" ng-minlength="4" ng-maxlength="5" required/>
+						</li>
+						</ol><!-- /fs-fields -->
+						<button ng-disabled="checkIfValid()" class="fs-submit" ng-click="addChild()" type="submit" ng-bind="submitBtn"></button>
+				</form><!-- /fs-form -->
+			</div><!-- /fs-form-wrap -->
+		</div><!-- /container -->
+	</ion-content>
+</ion-modal-view>

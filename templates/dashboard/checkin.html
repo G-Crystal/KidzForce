@@ -1,0 +1,47 @@
+<ion-modal-view ng-controller="checkInCtrl">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">Start Project</h1>
+    <button class="button" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+  <ion-content has-bouncing="false">
+    <div id="checkincard actioncard padding">
+      <style>
+
+.mapCheckin{
+	top:0;
+	position:absolute;
+  height:100%;
+  width:100%; /*margin-left:-10%; margin-top:-10%;*/
+  left:0;
+  z-index:-1;
+
+}
+
+.scroll{height: 100%;}
+
+#cardIdcheckin{position:absolute; display: flex; flex-direction: column; justify-content: center;}
+</style>
+      <div id="checkInMap" class="mapCheckin manual-card-fullwidth padding" data-tap-disabled="true">   </div>
+      <div id="cardIdcheckin" class="positive-bg card list light padding">
+       <div class="row">
+        <h2 class="light row">{{chore.project.name}}</h2>
+        <p class="light">{{chore.user.name}}</p>
+       </div>
+       <div class="row">
+          <div class="col-80">
+            
+            <h3 class="light">{{showLocalizedDate(chore.project.start_date * 1, 'America/New_York') | date : 'EEEE'}}</h3>
+            <h3 class="light">{{showLocalizedDate(chore.project.start_date * 1, 'America/New_York') | date : 'hh:mm a'}}</h3>
+          </div>
+          <div class="col-20 text=right">
+            <h2 class="balanced text-thin">${{chore.project.pointValuation}}</h2>
+          </div>
+       </div>
+        <h3 class="assertive">Ready to begin?</h3>
+        <p class="light">When you are ready to begin this project, press the check-in to keep track of your progress.</p>
+        <div class="row col"> <a ng-disabled="checkingIn" class="button button-block button-outline button-assertive" ng-click="checkIn(chore.project.id)">Check-in Now</a>
+   
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
