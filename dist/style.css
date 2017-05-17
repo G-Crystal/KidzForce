@@ -14303,9 +14303,11 @@ input[type='date']:after {
     background-repeat: no-repeat;
     opacity: 0.3;
     position: absolute;;
-    top: 0;
+    /*top: 0;*/
     left: 0;
     z-index: 1;
+    height: 80%;
+    bottom: 0;
 }
 
 .popup-container .popup {
