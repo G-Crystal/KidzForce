@@ -9935,7 +9935,7 @@ button.item.item-button-right {
  */
 .list {
   position: relative;
-  padding-top: 1px;
+  /*padding-top: 1px;*/
   padding-bottom: 1px;
   padding-left: 0;
   margin-bottom: 20px; }
@@ -12770,7 +12770,8 @@ a.button {
  * --------------------------------------------------
  */
 .padding {
-  padding: 10px; }
+  /*padding: 10px; */
+}
 
 .padding-top,
 .padding-vertical {
@@ -13919,7 +13920,7 @@ a .cardclose {
 #leadercard {
     background-color: rgb(48, 1, 84);
     min-height: 150px;
-    margin: -10px;
+    margin: 0 !important;
     padding: 2%;
     padding-bottom: 5%;
     padding-top: 3%;
