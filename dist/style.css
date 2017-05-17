@@ -8467,6 +8467,9 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   margin: 0 auto;
   /*height: 32px;*/
   font-size: 32px; }
+.tab-item .icon:hover {
+    color: #3D026E;
+}
 
 .tabs-icon-left.tabs .tab-item,
 .tabs-icon-left > .tabs .tab-item,
