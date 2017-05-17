@@ -8465,7 +8465,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
 .tab-item .icon {
   display: block;
   margin: 0 auto;
-  height: 32px;
+  /*height: 32px;*/
   font-size: 32px; }
 
 .tabs-icon-left.tabs .tab-item,
