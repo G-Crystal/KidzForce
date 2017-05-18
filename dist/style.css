@@ -9988,8 +9988,6 @@ button.item.item-button-right {
     border-bottom: 0; }
 
 .padding .card, .padding .list-inset {
-    width: 50%;
-    min-width: 280px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -13905,6 +13903,10 @@ div.tabtext.i {
     background: -moz-linear-gradient(top, #320269 0%, #6b008c 100%);
     background: -webkit-linear-gradient(top, #320269 0%, #6b008c 100%);
     background: linear-gradient(#310249, #2e0250);
+    width: 50%;
+    min-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .infocard {
