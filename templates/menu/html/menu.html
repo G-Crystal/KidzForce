@@ -68,6 +68,10 @@
             <ion-nav-title>
                 <span ng-bind="getCurrentUsername()"></span>
                 <ion-tabs ng-if="isParent()" class="tabs-icon tabs-positive fade-in-not-out header-tabs" style="overflow:visible;">
+                    <ion-tab title="" icon-off="logoicon" icon-on="logoicon" ui-sref="app.parent-dashboard" style="opactity:1!important; z-index: 22; overflow: visible;">
+                        <ion-nav-view name="tab-parent-dashboard">
+                        </ion-nav-view>
+                    </ion-tab>
                     <ion-tab title="My Profile" ng-click="showProfileModal()">
                         <ion-nav-view name="tab-parent-prifile"></ion-nav-view>
                     </ion-tab>

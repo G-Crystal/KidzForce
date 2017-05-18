@@ -7264,6 +7264,7 @@ a.subdued {
     background-image: linear-gradient(0deg, #21013c, #21013c 50%, transparent 50%);
     color: #fff; }
     .bar.bar-positive .title {
+      overflow: visible;
       color: #fff; }
     .bar.bar-positive.bar-footer {
       background-image: linear-gradient(180deg, #21013c, #21013c 50%, transparent 50%); }
@@ -8584,6 +8585,18 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
 .header-tabs a.tab-item {
   max-width: 100px;
   color: #000000;
+  overflow: visible;
+  position: relative;
+}
+
+.header-tabs a.tab-item:first-child {
+  position: absolute;
+  width: 130px;
+}
+
+.header-tabs .tab-item .icon {
+  margin: auto auto;
+  top: 10px;
 }
 
 .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
