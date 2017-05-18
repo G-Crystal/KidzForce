@@ -8599,6 +8599,18 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   top: 10px;
 }
 
+@media (min-width: 768px) {
+  .bar div.buttons-left {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-tabs {
+    display: none;
+  }
+}
+
 .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
   top: 0; }
 
