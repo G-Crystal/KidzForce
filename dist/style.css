@@ -9988,8 +9988,11 @@ button.item.item-button-right {
     border-bottom: 0; }
 
 .padding .card, .padding .list-inset {
-  margin-left: 0;
-  margin-right: 0; }
+    width: 50%;
+    min-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .card .item:first-child,
 .list-inset .item:first-child,
@@ -12773,7 +12776,7 @@ a.button {
  * --------------------------------------------------
  */
 .padding {
-  /*padding: 10px; */
+  padding: 10px; 
 }
 
 .padding-top,
