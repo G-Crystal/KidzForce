@@ -13246,7 +13246,9 @@ a.button {
   z-index: 10; }
   [nav-bar-transition="ios"] [nav-bar="active"] .bar,
   [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
-    background: transparent; }
+    /*background: transparent; */
+    background-color: #ffc105;
+  }
 
 [nav-bar-transition="ios"] [nav-bar="cached"] {
   display: block; }
