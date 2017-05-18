@@ -66,7 +66,27 @@
                 <!-- <button class="button button-clear button-light"><span ng-bind="getCurrentUsername()"></span></button> -->
             </ion-nav-buttons>
             <ion-nav-title>
-              <span ng-bind="getCurrentUsername()"></span>
+                <span ng-bind="getCurrentUsername()"></span>
+                <ion-tabs ng-if="isParent()" class="tabs-icon tabs-positive fade-in-not-out header-tabs" style="overflow:visible;">
+                    <ion-tab title="My Profile" ng-click="showProfileModal()">
+                        <ion-nav-view name="tab-parent-prifile"></ion-nav-view>
+                    </ion-tab>
+                    <ion-tab title="About" ng-click="showAboutModal()">
+                        <ion-nav-view name="tab-parent-about"></ion-nav-view>
+                    </ion-tab>
+                    <ion-tab title="Store" ng-click="purchaseOthers()">
+                        <ion-nav-view name="tab-parent-store"></ion-nav-view>
+                    </ion-tab>
+                    <ion-tab title="Projects" ui-sref="app.parent-chores">
+                        <ion-nav-view name="tab-parent-chores"></ion-nav-view>
+                    </ion-tab>
+                    <ion-tab title="Children" ui-sref="app.parent-children">
+                        <ion-nav-view name="tab-parent-children"></ion-nav-view>
+                    </ion-tab>
+                    <ion-tab title="Logout" ng-click="logout()">
+                        <ion-nav-view name="tab-parent-logout"></ion-nav-view>
+                    </ion-tab>
+                </ion-tabs>
             </ion-nav-title>
             <ion-nav-buttons side="right" class="has-header">
                 <button ng-if="!isParent() && !window.isBrowserMode" class="button button-icon button-positive icon-safety" ng-click="showHelpMeModal()"></button>
@@ -135,12 +155,13 @@
                     <!-- <i class="icon-Chores-Nav positive icon-left"></i>&nbsp;New Project -->
                 <!-- </ion-item> -->
                 <ion-item class="item-toggle">
-                    <i class="icon-notification positive icon-left"></i>&nbsp;Send notifications<label class="toggle toggle-assertive">
-       <input type="checkbox" ng-model="profile.preferences.send_notifications">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
+                    <i class="icon-notification positive icon-left"></i>&nbsp;Send notifications
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model="profile.preferences.send_notifications">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
                 </ion-item>
                 <ion-item ng-click="logout()">
                     <i class="icon-save positive icon-left"></i>&nbsp;Logout

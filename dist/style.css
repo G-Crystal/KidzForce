@@ -8581,6 +8581,11 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   cursor: default;
   pointer-events: none; }
 
+.header-tabs a.tab-item {
+  max-width: 100px;
+  color: #000000;
+}
+
 .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
   top: 0; }
 
