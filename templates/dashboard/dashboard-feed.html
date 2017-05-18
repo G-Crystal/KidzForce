@@ -3,6 +3,78 @@
     <ion-content padding="true" class="manual-remove-top-padding has-header" has-bouncing="false">
         <div class="list card manual-card-fullwidth" id="leadercard" ng-if="profile.$id != undefined">
             <div class="row" ng-cloak>
+                <div class="dash-left-margin">
+                </div>
+                <div class="dash-info-col">
+                    <div class="row" ng-cloak>
+                        <div class="col">
+                            <h4 class="assertive" ng-if="!isParent()" ng-bind="balance.rank"></h4>
+                            <h2 class="light text-uppercase" ng-bind="profile.name"></h2>
+                        </div>
+                    </div>
+                    <div class="row" ng-cloak>
+                        <div class="col-50">
+                            <h4 class="light">Projects&nbsp;<span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_total_projects"></span><br>
+                        <span class="light">Completed&nbsp;</span><span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_completed_projects"></span></h4></div>
+                        <div class="col-50">
+                            <h4 class="light">Rating&nbsp;<rating id="rating" ng-model="balance.avg_review_score" max="5" readonly="true"></rating></h4>
+                        </div>
+                    </div>
+                    <div class="row" ng-cloak>
+                        <div class="col-50">
+                            <h4 class="light">Member since&nbsp;</h4>
+                        </div>
+                        <div class="col-50">
+                            <span class="assertive" style="font-size: 1.4em;" ng-bind="profile.member_since*1000 | date : 'M/d/y'"></span>
+                        </div>
+                    </div>
+                    <div class="row" ng-cloak>
+                        <div class="col-50">
+                            <h4 class="light">Member ID&nbsp;</h4>
+                        </div>
+                        <div class="col-50">
+                            <span class="assertive" style="font-size: 1.4em;" ng-bind="profile['id']"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash-right-margin">
+                </div>
+            </div>
+            <hr class="subdued" ng-cloak>
+            <div class="row" ng-cloak>
+                <div class="dash-left-margin">
+                </div>
+                <div class="dash-info-col">
+                    <div class="row" ng-if="!isParent()" ng-cloak>
+                        <div class="col-50">
+                            <h4 class="assertive">Earned</h4>
+                            <h2 class="light" style="font-size: 2.5em;">${{balance.cash || '0'}}</h2>
+                        </div>
+                        <div class="col-50">                                    
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-50">
+                            <h4 class="assertive">Points</h4>
+                            <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2>
+                        </div>
+                        <div class="col-50">                                    
+                        </div>
+                    </div>
+                    <div class="row" ng-if="!isParent()" ng-cloak>
+                        <div class="col-50">
+                            <h4 class="assertive">Points</h4>
+                            <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2>
+                        </div>
+                        <div class="col-50">                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="dash-right-margin">
+                </div>
+            </div>
+
+         <!--   <div class="row" ng-cloak>
                 <div class="col">
                     <h4 class="assertive" ng-if="!isParent()" ng-bind="balance.rank"></h4>
                     <h2 class="light text-uppercase" ng-bind="profile.name"></h2>
@@ -10,15 +82,18 @@
             </div>
             <div class="roo"> </div>
             <div class="row" ng-cloak>
-                <div class="col-50">
+                <div class="col-20"></div>
+                <div class="col-30">
                     <h4 class="light">Projects&nbsp;<span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_total_projects"></span><br>
-                <span class="light">Completed&nbsp;</span><span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_completed_projects"></span></h4></div>
+                    <span class="light">Completed&nbsp;</span><span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_completed_projects"></span></h4>
+                </div>
                 <div class="col-50">
                     <h4 class="light" style="display: inline; float:left;">Rating&nbsp;<rating id="rating" ng-model="balance.avg_review_score" max="5" readonly="true"></rating></h4>
                 </div>
             </div>
             <div class="row" ng-cloak>
-              <div class="col-50">
+              <div class="col-20"></div>
+              <div class="col-30">
                 <h4 class="light">Member since&nbsp;</h4>
               </div>
               <div class="col-50">
@@ -26,7 +101,8 @@
               </div>
             </div>
             <div class="row" ng-if="!isParent()" ng-cloak>
-              <div class="col-50">
+              <div class="col-20"></div>
+              <div class="col-30">
                 <h4 class="light">Member ID&nbsp;</h4>
               </div>
               <div class="col-50">
@@ -35,22 +111,27 @@
             </div>
             <hr class="subdued" ng-cloak>
             <div class="row" ng-if="!isParent()" ng-cloak>
-                <div class="col-50">
+                <div class="col-20"></div>
+                <div class="col-30">
                     <h4 class="assertive">Earned</h4>
-                    <h2 class="light" style="font-size: 2.5em;">${{balance.cash || '0'}}</h2></div>
+                    <h2 class="light" style="font-size: 2.5em;">${{balance.cash || '0'}}</h2>
+                </div>
                 <div class="col-50">
                     <h4 class="assertive">Points</h4>
-                    <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2></div>
+                    <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2>
+                </div>
             </div>
             <div class="row" ng-if="isParent()" ng-cloak>
-                <div class="col-50">
+                <div class="col-20"></div>
+                <div class="col-30">
                     <h4 class="assertive">Points</h4>
-                    <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2></div>
+                    <h2 class="light" style="font-size: 2.5em;">{{balance.points || '0'}}</h2>
+                </div>
             </div>
             <div class="row">
 
             </div>
-
+        -->
         </div>
         <ion-list id="feedcards" ng-cloak>
 
