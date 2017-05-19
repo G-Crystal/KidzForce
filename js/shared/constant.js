@@ -3,10 +3,10 @@ window.isBrowserMode = true;
 angular.module('kb.constant', [])
 
     .constant('ENDPOINT_LIST', (function () {         
-    // var web_server = 'http://api.kidzforce.com/v1/';        
-    // var api_root = '';
-    var web_server = 'http://ec2-107-21-160-8.compute-1.amazonaws.com/app/api/';        
+    var web_server = 'http://api.kidzforce.com/v1/';        
     var api_root = '';
+    // var web_server = 'http://ec2-107-21-160-8.compute-1.amazonaws.com/app/api/';        
+    // var api_root = '';
 
             
     return {            

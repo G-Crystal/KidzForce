@@ -4,9 +4,9 @@ appControllers
     function($scope, $rootScope, $sce, $state, $ionicPopup, $ionicHistory, $ionicGesture, $cordovaInAppBrowser, ENDPOINT_LIST, $localStorage, $ionicLoading, AuthService, $http, NotificationService, $q, $interval, $cordovaBadge, ProjectService, ChildService, ParentService, ChildrenService) {
 
         if (!$rootScope.isParent()){
-            $rootScope.rooDailyDrops($localStorage['child']['member-id']);
+            // $rootScope.rooDailyDrops($localStorage['child']['member-id']);
         }else{
-            $rootScope.rooDailyDrops($localStorage['uid']);
+            // $rootScope.rooDailyDrops($localStorage['uid']);
         }
 
         $scope.isEmpty = false;
