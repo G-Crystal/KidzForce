@@ -8607,6 +8607,10 @@ a.tab-item:nth-child(8) {
   top: 10px;
 }
 
+.footer-tabs .tab-nav.tabs {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   a.tab-item:nth-child(8) {
     position: absolute;

@@ -130,7 +130,7 @@
                 <li><a ng-click="showAddProjectModal()"><span class='kb-25x icon-chore'></span></a><span class="navtextsmall">New Project</span></li>
             </ul>
         </div>
-        <ion-tabs ng-if="!isParent()" class="tabs-icon tabs-positive fade-in-not-out" style="overflow:visible;">
+        <ion-tabs ng-if="!isParent()" class="tabs-icon tabs-positive fade-in-not-out footer-tabs" style="overflow:visible;">
 
             <ion-tab title="Chores" icon-off="icon-chore dark" icon-on="icon-chore positive" ui-sref="app.child-chores">
                 <ion-nav-view name="tab-child-chores"></ion-nav-view>
@@ -146,7 +146,7 @@
                 <ion-nav-view name="tab-child-earned"></ion-nav-view>
             </ion-tab>
         </ion-tabs>
-        <ion-tabs ng-if="isParent()" class="tabs-icon tabs-positive fade-in-not-out" style="overflow:visible;">
+        <ion-tabs ng-if="isParent()" class="tabs-icon tabs-positive fade-in-not-out footer-tabs" style="overflow:visible;">
             <ion-tab title="Chores2" icon-off="icon-chore dark" icon-on="icon-chore positive" ui-sref="app.parent-chores">
                 <ion-nav-view name="tab-parent-chores"></ion-nav-view>
             </ion-tab>
