@@ -8467,7 +8467,9 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   display: block;
   margin: 0 auto;
   /*height: 32px;*/
-  font-size: 32px; }
+  font-size: 32px; 
+  width: 140px !important;
+}
 .tab-item .icon:hover {
     color: #3D026E;
 }
@@ -8583,10 +8585,14 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   pointer-events: none; }
 
 .header-tabs a.tab-item {
-  max-width: 100px;
+  max-width: 75px;
   color: #000000;
   overflow: visible;
   position: relative;
+}
+
+a.tab-item:nth-child(8) {
+    position: absolute;
 }
 
 .header-tabs a.tab-item:first-child {
@@ -8599,9 +8605,21 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   top: 10px;
 }
 
+@media (min-width: 1024px) {
+  a.tab-item:nth-child(8) {
+    position: absolute;
+    left: 5%;
+  }
+}
+
 @media (min-width: 768px) {
   .bar div.buttons-left {
     display: none;
+  }
+
+  a.tab-item:nth-child(8) {
+      position: absolute;
+      left: 3%;
   }
 }
 
