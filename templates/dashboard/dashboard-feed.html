@@ -7,15 +7,20 @@
                 </div>
                 <div class="dash-info-col">
                     <div class="row" ng-cloak>
-                        <div class="col">
+                        <div class="col-50">
                             <h4 class="assertive" ng-if="!isParent()" ng-bind="balance.rank"></h4>
                             <h2 class="light text-uppercase" ng-bind="profile.name"></h2>
                         </div>
                     </div>
                     <div class="row" ng-cloak>
                         <div class="col-50">
-                            <h4 class="light">Projects&nbsp;<span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_total_projects"></span><br>
-                        <span class="light">Completed&nbsp;</span><span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_completed_projects"></span></h4></div>
+                            <h4 class="light">
+                                Projects&nbsp;
+                                <span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_total_projects"></span><br>
+                                <span class="light">Completed&nbsp;</span>
+                                <span class="assertive" style="font-size: 1.4em;" ng-bind="balance.number_of_completed_projects"></span>
+                            </h4>
+                        </div>
                         <div class="col-50">
                             <h4 class="light">Rating&nbsp;<rating id="rating" ng-model="balance.avg_review_score" max="5" readonly="true"></rating></h4>
                         </div>
