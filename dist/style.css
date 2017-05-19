@@ -14094,8 +14094,8 @@ div.tabtext.i {
     box-shadow: 1px black;
     max-width: 400px;
     /* float: left; */
-    margin-right: 1%;
-    margin-left: 1%;
+    margin-right: auto;
+    margin-left: auto;
     cursor: pointer;
     margin-top: 5%;
     margin-bottom: 5%;
