@@ -8589,6 +8589,8 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   color: #000000;
   overflow: visible;
   position: relative;
+  padding-top: 5px;
+  font-weight: bold;
 }
 
 a.tab-item:nth-child(8) {
